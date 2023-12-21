@@ -13,6 +13,10 @@ First we need to extract and process radicals as separate SVGs. This involves bo
 ./extract_radicals.py
 ```
 
+### Development
+
+These scripts are formatted using [Black](https://github.com/psf/black).
+
 ### License
 
 Available under the terms of the [GNU Lesser General Public License](LICENSE.md), v2.1 only.
