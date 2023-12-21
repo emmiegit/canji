@@ -3,6 +3,7 @@
 import os
 import re
 import sys
+import unicodedata
 from xml.etree import ElementTree
 
 KANJIVG_DIRECTORY = "kanjivg/kanji"
@@ -36,14 +37,17 @@ if __name__ == "__main__":
     ElementTree.register_namespace("", "http://www.w3.org/2000/svg")
     ElementTree.register_namespace("kvg", "http://kanjivg.tagaini.net")
 
-    # Process radicals
-    # TODO
-
-    # Process full characters
+    # Process KanjiVG files
     for path in os.listdir(KANJIVG_DIRECTORY):
+        # Skip, only consider non-variants
         match = REGULAR_KANJI_PATH_REGEX.fullmatch(path)
         if match is None:
-            # Skipping, only consider regular kanji
+            continue
+
+        # Skip, based on categorization of character
+        char = chr(int(match[1], 16))
+        char_name = unicodedata.name(char)
+        if "CJK" not in char_name:
             continue
 
         input_path = os.path.join(KANJIVG_DIRECTORY, path)
