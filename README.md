@@ -5,11 +5,11 @@ A system to procedurally generate plausible but nonexistant kanji.
 
 ### Execution
 
-This system is set up as a series of scripts to perform each of the requisite steps.
+This system is set up as a series of scripts to perform each of the requisite steps. These scripts target Python 3.
 
 First we need to extract and process radicals as separate SVGs. This involves both pulling out component radicals (e.g. 亻or 糹), it also copies full characters like 頑.
 
-```shell
+```sh
 ./extract_radicals.py
 ```
 
