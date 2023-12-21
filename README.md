@@ -1,5 +1,5 @@
 ## <ruby>缶<rp>(</rp><rt>かん</rt><rp>)</rp> 字<rp>(</rp><rt>じ</rt><rp>)</rp></ruby>
-<small>_(Read like "kanji")_</small>
+<small><em>(Read like "kanji")</em></small>
 
 A system to procedurally generate plausible but nonexistant kanji.
 
