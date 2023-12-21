@@ -52,4 +52,3 @@ if __name__ == "__main__":
         tree, root = parse_xml(input_path)
         process_kanji(root)
         tree.write(output_path, encoding="utf-8")
-        break
