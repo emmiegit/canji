@@ -30,12 +30,12 @@ class Radical:
     character: Optional[str]
     path: str
     position: Union[0, 1]
-    _node: Optional[Element] = None
     x: tuple[int, int]
     y: tuple[int, int]
     width: tuple[int, int]
     height: tuple[int, int]
     viewbox: str
+    _node: Optional[Element] = None
 
     @property
     def node(self) -> Element:
