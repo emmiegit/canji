@@ -3,6 +3,7 @@ import re
 import tomllib
 from dataclasses import dataclass
 from typing import Optional, Union
+from xml.etree import ElementTree
 from xml.etree.ElementTree import Element
 
 from common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY, DEFAULT_VIEWBOX, parse_xml

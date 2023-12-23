@@ -12,7 +12,7 @@ from xml.etree.ElementTree import Element, SubElement
 from common import DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_VIEWBOX, parse_xml
 from data import Radical, ImagePart, read_data
 
-XML_HEADER = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'
+XML_HEADER = b'<?xml version="1.0" encoding="UTF-8" standalone="no"?>'
 
 
 def build_svg(parts: Iterable[ImagePart]):
@@ -44,9 +44,9 @@ def build_svg(parts: Iterable[ImagePart]):
 
 
 def write_svg(path, root):
-    with open(path, "w") as file:
+    with open(path, "wb") as file:
         file.write(XML_HEADER)
-        file.write("\n")
+        file.write(b"\n")
         file.write(ElementTree.tostring(root, encoding="utf-8"))
 
 
