@@ -30,14 +30,21 @@ class Radical:
     character: Optional[str]
     path: str
     position: Union[0, 1]
-    node: Element
+    _node: Optional[Element] = None
     x: tuple[int, int]
     y: tuple[int, int]
     width: tuple[int, int]
     height: tuple[int, int]
     viewbox: str
 
-    def make_parts(self, other: Element):
+    @property
+    def node(self) -> Element:
+        if self._node is None:
+            self._node = parse_xml(self.path)
+
+        return self._node
+
+    def make_parts(self, other: Element) -> list[ImagePart]:
         parts = []
         for pos in (0, 1):
             this = self.position == pos
@@ -58,7 +65,14 @@ class Radical:
 class Character:
     character: Optional[str]
     path: str
-    node: Element
+    _node: Optional[Element] = None
+
+    @property
+    def node(self) -> Element:
+        if self._node is None:
+            self._node = parse_xml(self.path)
+
+        return self._node
 
 
 @dataclass
@@ -71,7 +85,7 @@ class KanjiData:
         return s in self.radical_list
 
 
-def read_data(path="data.toml", load_radicals=True):
+def read_data(path="data.toml"):
     with open(path, "rb") as file:
         data = tomllib.load(file)
 
@@ -87,11 +101,6 @@ def read_data(path="data.toml", load_radicals=True):
             assert char is not None, "One of char, file must be specified!"
             file = f"{ord(char):05x}.svg"
 
-        if load_radicals:
-            node = parse_xml(os.path.join(RADICAL_DIRECTORY, file))
-        else:
-            node = Element("null")
-
         return Radical(
             character=char,
             path=os.path.join(RADICAL_DIRECTORY, file),
@@ -101,7 +110,6 @@ def read_data(path="data.toml", load_radicals=True):
             width=entry["width"],
             height=entry["height"],
             viewbox=entry["viewbox"],
-            node=node,
         )
 
     def make_character(file):
@@ -115,15 +123,13 @@ def read_data(path="data.toml", load_radicals=True):
         return Character(
             character=character,
             path=path,
-            node=parse_xml(path),
         )
 
     radicals = list(map(make_radical, data["radicals"]))
-    characters = (
-        list(map(make_character, os.listdir(CHARACTER_DIRECTORY)))
-        if load_radicals
-        else []
-    )
+    characters = list(map(make_character, os.listdir(CHARACTER_DIRECTORY)))
+
     return KanjiData(
-        radicals=radicals, radical_list=frozenset(radical_list), characters=characters,
+        radicals=radicals,
+        radical_list=frozenset(radical_list),
+        characters=characters,
     )
