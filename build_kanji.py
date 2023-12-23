@@ -19,8 +19,6 @@ def build_svg(parts: Iterable[ImagePart]):
     root = Element(
         "svg",
         attrib={
-            "xmlns": "http://www.w3.org/2000/svg",
-            "xmlns:kvg": "http://kanjivg.tagaini.net",
             "width": str(DEFAULT_WIDTH),
             "height": str(DEFAULT_HEIGHT),
             "viewBox": str(DEFAULT_VIEWBOX),
