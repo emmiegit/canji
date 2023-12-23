@@ -56,7 +56,8 @@ if __name__ == "__main__":
     # Normalize current directory
     os.chdir(os.path.dirname(sys.argv[0]))
 
-    # Load kanji data
+    # Setup
+    register_xml_namespaces()
     data = read_data()
 
     # Generate one random character

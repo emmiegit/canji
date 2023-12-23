@@ -27,11 +27,8 @@ if __name__ == "__main__":
     os.makedirs(RADICAL_DIRECTORY, exist_ok=True)
     os.makedirs(CHARACTER_DIRECTORY, exist_ok=True)
 
-    # Register XML namespaces
-    ElementTree.register_namespace("", "http://www.w3.org/2000/svg")
-    ElementTree.register_namespace("kvg", "http://kanjivg.tagaini.net")
-
-    # Load kanji data
+    # Setup
+    register_xml_namespaces()
     data = read_data(load_radicals=False)
 
     def is_radical(path):
