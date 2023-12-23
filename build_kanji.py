@@ -33,6 +33,7 @@ def build_svg(parts: Iterable[ImagePart]):
             "width": str(part.width),
             "height": str(part.height),
             "viewBox": part.viewbox,
+            "preserveAspectRatio": "none",
         }
         root.append(element)
 
