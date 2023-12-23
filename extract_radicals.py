@@ -52,9 +52,7 @@ if __name__ == "__main__":
 
         input_path = os.path.join(KANJIVG_DIRECTORY, path)
         output_path = os.path.join(
-            RADICAL_DIRECTORY
-            if is_radical(path)
-            else CHARACTER_DIRECTORY,
+            RADICAL_DIRECTORY if is_radical(path) else CHARACTER_DIRECTORY,
             path,
         )
 

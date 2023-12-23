@@ -1,4 +1,5 @@
 import os
+import re
 import tomllib
 from dataclasses import dataclass
 from typing import Optional, Union
@@ -9,6 +10,8 @@ from common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY, DEFAULT_VIEWBOX, pars
 """
 Code to read the data file for kanji processing.
 """
+
+SVG_FILENAME_REGEX = re.compile(r"([0-9a-f]+)\.svg")
 
 
 @dataclass
@@ -25,7 +28,7 @@ class ImagePart:
 @dataclass
 class Radical:
     character: Optional[str]
-    file: str
+    path: str
     position: Union[0, 1]
     node: Element
     x: tuple[int, int]
@@ -52,9 +55,17 @@ class Radical:
 
 
 @dataclass
+class Character:
+    character: Optional[str]
+    path: str
+    node: Element
+
+
+@dataclass
 class KanjiData:
     radical_list: frozenset[str]
     radicals: list[Radical]
+    characters: list[Character]
 
     def is_radical(self, s: str) -> bool:
         return s in self.radical_list
@@ -66,7 +77,7 @@ def read_data(path="data.toml", load_radicals=True):
 
     radical_list = set()
 
-    def make(entry):
+    def make_radical(entry):
         char = entry.get("char")
         if char is not None:
             radical_list.add(char)
@@ -83,7 +94,7 @@ def read_data(path="data.toml", load_radicals=True):
 
         return Radical(
             character=char,
-            file=file,
+            path=os.path.join(RADICAL_DIRECTORY, file),
             position=entry["pos"],
             x=entry["x"],
             y=entry["y"],
@@ -93,5 +104,26 @@ def read_data(path="data.toml", load_radicals=True):
             node=node,
         )
 
-    radicals = list(map(make, data["radicals"]))
-    return KanjiData(radicals=radicals, radical_list=frozenset(radical_list))
+    def make_character(file):
+        match = SVG_FILENAME_REGEX.fullmatch(file)
+        if match is None:
+            character = None
+        else:
+            character = chr(int(match[1], 16))
+
+        path = os.path.join(CHARACTER_DIRECTORY, file)
+        return Character(
+            character=character,
+            path=path,
+            node=parse_xml(path),
+        )
+
+    radicals = list(map(make_radical, data["radicals"]))
+    characters = (
+        list(map(make_character, os.listdir(CHARACTER_DIRECTORY)))
+        if load_radicals
+        else []
+    )
+    return KanjiData(
+        radicals=radicals, radical_list=frozenset(radical_list), characters=characters,
+    )
