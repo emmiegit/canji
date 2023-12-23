@@ -36,8 +36,8 @@ def build_svg(parts: Iterable[ImagePart]):
             "height": str(part.height),
             "viewBox": part.viewbox,
         }
-        if part.character is not None and "kvg:element" not in element.attrib:
-            element.attrib["kvg:element"] = part.character
+        if part.character is not None:
+            element.attrib["canji:element"] = part.character
         root.append(element)
 
     return root
