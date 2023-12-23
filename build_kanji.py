@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 
-import tomllib
+import os
 import random
+import sys
+import tomllib
 from copy import deepcopy
+from typing import Iterable
 from xml.etree import ElementTree
 from xml.etree.ElementTree import Element, SubElement
 
@@ -12,7 +15,7 @@ from data import Radical, ImagePart, read_data
 XML_HEADER = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'
 
 
-def build_svg(parts: iter[ImagePart]):
+def build_svg(parts: Iterable[ImagePart]):
     root = Element(
         "svg",
         attrib={
@@ -59,6 +62,6 @@ if __name__ == "__main__":
     # Generate one random character
     radical = random.choice(data.radicals)
     character = random.choice(data.characters)
-    parts = radical.make_parts(character.node)
+    parts = radical.make_parts(character)
     svg = build_svg(parts)
     write_svg("_output.svg", svg)

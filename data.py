@@ -26,6 +26,20 @@ class ImagePart:
 
 
 @dataclass
+class Character:
+    character: Optional[str]
+    path: str
+    _node: Optional[Element] = None
+
+    @property
+    def node(self) -> Element:
+        if self._node is None:
+            self._node = parse_xml(self.path)
+
+        return self._node
+
+
+@dataclass
 class Radical:
     character: Optional[str]
     path: str
@@ -44,7 +58,7 @@ class Radical:
 
         return self._node
 
-    def make_parts(self, other: Element) -> list[ImagePart]:
+    def make_parts(self, other: Character) -> list[ImagePart]:
         parts = []
         for pos in (0, 1):
             this = self.position == pos
@@ -54,25 +68,12 @@ class Radical:
                     y=self.y[pos],
                     width=self.width[pos],
                     height=self.height[pos],
-                    node=self.node if this else other,
+                    character=self.character if this else other.character,
+                    node=self.node if this else other.node,
                     viewbox=self.viewbox if this else DEFAULT_VIEWBOX,
                 )
             )
         return parts
-
-
-@dataclass
-class Character:
-    character: Optional[str]
-    path: str
-    _node: Optional[Element] = None
-
-    @property
-    def node(self) -> Element:
-        if self._node is None:
-            self._node = parse_xml(self.path)
-
-        return self._node
 
 
 @dataclass
