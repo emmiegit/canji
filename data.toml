@@ -24,6 +24,6 @@ char = "犭"
 pos = 0
 x = [0, 30]
 y = [0, 0]
-width = [36, 90]
+width = [36, 85]
 height = [109, 109]
 viewbox = "0 0 42 109"
