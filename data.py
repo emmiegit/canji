@@ -29,12 +29,13 @@ class ImagePart:
 class Character:
     character: Optional[str]
     path: str
+    _tree: Optional[ElementTree] = None
     _node: Optional[Element] = None
 
     @property
     def node(self) -> Element:
         if self._node is None:
-            self._node = parse_xml(self.path)
+            self._tree, self._node = parse_xml(self.path)
 
         return self._node
 
@@ -49,12 +50,13 @@ class Radical:
     width: tuple[int, int]
     height: tuple[int, int]
     viewbox: str
+    _tree: Optional[ElementTree] = None
     _node: Optional[Element] = None
 
     @property
     def node(self) -> Element:
         if self._node is None:
-            self._node = parse_xml(self.path)
+            self._tree, self._node = parse_xml(self.path)
 
         return self._node
 
