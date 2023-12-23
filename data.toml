@@ -12,9 +12,9 @@
 #                            This basically describes, in the lists to follow,
 #                            which item is this radical, leaving the other for the
 #                            combining character.
-# x = [0, 28]             -- The x positions for the elements. The "pos" item is the radical.
+# x = [0, 25]             -- The x positions for the elements. The "pos" item is the radical.
 # y = [0, 0]              -- The y positions for the elements.
-# width = [36, 90]        -- The widths for the elements.
+# width = [34, 85]        -- The widths for the elements.
 # height = [109, 109]     -- The heights for the elements.
 # viewbox = "0 0 42 109"  -- The viewbox to use for the radical itself.
 #                            The combining character is assumed to have the default viewbox.
@@ -22,7 +22,7 @@
 [[radicals]]
 char = "犭"
 pos = 0
-x = [0, 30]
+x = [0, 28]
 y = [0, 0]
 width = [36, 85]
 height = [109, 109]
