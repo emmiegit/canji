@@ -6,17 +6,12 @@ import sys
 import unicodedata
 from xml.etree import ElementTree
 
+from .common import parse_xml
+
 KANJIVG_DIRECTORY = "kanjivg/kanji"
 OUTPUT_DIRECTORY = "radicals"
 
 REGULAR_KANJI_PATH_REGEX = re.compile(r"(\w+)\.svg")
-
-
-def parse_xml(path):
-    tree = ElementTree.parse(path)
-    root = tree.getroot()
-    assert root.tag == "{http://www.w3.org/2000/svg}svg"
-    return tree, root
 
 
 def process_kanji(root):
