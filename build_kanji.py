@@ -1,27 +1,18 @@
 #!/usr/bin/env python3
 
 import tomllib
-from collections import namedtuple
-from dataclasses import dataclass
+import random
+from copy import deepcopy
 from xml.etree import ElementTree
 from xml.etree.ElementTree import Element, SubElement
 
-from common import DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_VIEWBOX, parse_xml
+from .common import DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_VIEWBOX, parse_xml
+from .data import Radical, ImagePart, read_data
 
 XML_HEADER = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'
 
 
-@dataclass
-class SubImage:
-    node: Element
-    x: int
-    y: int
-    width: int = DEFAULT_WIDTH
-    height: int = DEFAULT_HEIGHT
-    viewbox: str = DEFAULT_VIEWBOX
-
-
-def build_svg(parts):
+def build_svg(parts: iter[ImagePart]):
     root = Element(
         "svg",
         attrib={
@@ -34,13 +25,17 @@ def build_svg(parts):
     )
 
     for part in parts:
-        part.node.attrib = {
+        element = deepcopy(part.node)
+        element.attrib = {
             "x": str(part.x),
             "y": str(part.y),
             "width": str(part.width),
             "height": str(part.height),
             "viewBox": part.viewbox,
         }
+        if part.character is not None and "kvg:element" not in element.attrib:
+            element.attrib["kvg:element"] = part.character
+        root.append(element)
 
     return root
 
@@ -53,4 +48,16 @@ def write_svg(path, root):
 
 
 if __name__ == "__main__":
-    raise NotImplementedError
+    # TODO
+
+    # Normalize current directory
+    os.chdir(os.path.dirname(sys.argv[0]))
+
+    # Load kanji data
+    data = read_data()
+
+    # Generate one random character
+    radical = random.choice(data.radicals)
+    character = parse_xml
+    svg =
+    write_svg("_output.svg", svg)
