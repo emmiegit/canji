@@ -1,0 +1,11 @@
+# This data file contains information used by the kanji generator system.
+# For instance, orientation and size information for radicals
+# (e.g. 犭only appears on the left and is <foo> units wide)
+
+[[radicals]]
+char = "犭"
+# file = f"{ord(char):04x}.svg"
+x = 0
+y = 0
+width = 36
+viewbox = "0 0 42 109"

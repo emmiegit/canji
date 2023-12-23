@@ -21,7 +21,7 @@ class SubImage:
     viewbox: str = DEFAULT_VIEWBOX
 
 
-def build_svg_from_parts(part):
+def build_svg(parts):
     root = Element(
         "svg",
         attrib={
