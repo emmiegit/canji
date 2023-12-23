@@ -1,3 +1,3 @@
 #!/bin/bash
 set -eu
-rm -rf radicals/
+rm -rf radicals/ characters/

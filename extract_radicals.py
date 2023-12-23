@@ -6,10 +6,11 @@ import sys
 import unicodedata
 from xml.etree import ElementTree
 
-from common import parse_xml
+from common import parse_xml, read_data
 
 KANJIVG_DIRECTORY = "kanjivg/kanji"
-OUTPUT_DIRECTORY = "radicals"
+RADICAL_OUTPUT_DIRECTORY = "radicals"
+CHARACTER_OUTPUT_DIRECTORY = "characters"
 
 REGULAR_KANJI_PATH_REGEX = re.compile(r"(\w+)\.svg")
 
@@ -25,12 +26,18 @@ if __name__ == "__main__":
     os.chdir(os.path.dirname(sys.argv[0]))
 
     # Create output directory
-    if not os.path.isdir(OUTPUT_DIRECTORY):
-        os.mkdir(OUTPUT_DIRECTORY)
+    os.makedirs(RADICAL_OUTPUT_DIRECTORY, exist_ok=True)
+    os.makedirs(CHARACTER_OUTPUT_DIRECTORY, exist_ok=True)
 
-    # Register namespace
+    # Register XML namespaces
     ElementTree.register_namespace("", "http://www.w3.org/2000/svg")
     ElementTree.register_namespace("kvg", "http://kanjivg.tagaini.net")
+
+    # Load kanji data
+    data = read_data()
+
+    def is_radical(path):
+        return any(map(lambda r: r.file == path, data.radicals))
 
     # Process KanjiVG files
     for path in os.listdir(KANJIVG_DIRECTORY):
@@ -46,7 +53,12 @@ if __name__ == "__main__":
             continue
 
         input_path = os.path.join(KANJIVG_DIRECTORY, path)
-        output_path = os.path.join(OUTPUT_DIRECTORY, path)
+        output_path = os.path.join(
+            RADICAL_OUTPUT_DIRECTORY
+            if is_radical(path)
+            else CHARACTER_OUTPUT_DIRECTORY,
+            path,
+        )
 
         tree, root = parse_xml(input_path)
         process_kanji(root)

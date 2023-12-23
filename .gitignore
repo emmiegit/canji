@@ -5,6 +5,7 @@ __pycache__/
 
 # Generated artifacts
 radicals/
+characters/
 
 # Miscellaneous
 .*.sw?
