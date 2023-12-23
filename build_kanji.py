@@ -57,7 +57,8 @@ if __name__ == "__main__":
     data = read_data()
 
     # Generate one random character
-    radical = random.choice(data.radicals)
-    character = parse_xml
-    svg =
-    write_svg("_output.svg", svg)
+    # XXX
+    # radical = random.choice(data.radicals)
+    # character = parse_xml
+    # svg =
+    # write_svg("_output.svg", svg)

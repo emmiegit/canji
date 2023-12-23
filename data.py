@@ -1,7 +1,10 @@
+import os
 import tomllib
 from dataclasses import dataclass
 from typing import Optional
 from xml.etree.ElementTree import Element
+
+from .common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY
 
 """
 Code to read the data file for kanji processing.
@@ -63,20 +66,31 @@ def read_data(path="data.toml"):
     with open(path, "rb") as file:
         data = tomllib.load(file)
 
+    radical_list = set()
+
     def make(entry):
-        char = entry["char"]  # XXX opt
-        image = SubImage(
+        char = entry.get("char")
+        if char is not None:
+            radical_list.add(char)
+
+        file = entry.get("file")
+        if file is None:
+            assert char is not None, "One of char, file must be specified!"
+            file = f"{ord(char):05x}.svg"
+
+        node = parse_xml(os.path.join(RADICAL_DIRECTORY, file))
+
+        return Radical(
+            character=char,
+            file=file,
+            position=entry["pos"],
             x=entry["x"],
             y=entry["y"],
-            width=entry.get("width", DEFAULT_WIDTH),
-            height=entry.get("height", DEFAULT_HEIGHT),
-            viewbox=entry.get("viewbox", DEFAULT_VIEWBOX),
-        )
-        return Radical(
-            char=char,
-            file=entry.get("file", f"{ord(char):05x}.svg"),
-            image=image,
+            width=entry["width"],
+            height=entry["height"],
+            viewbox=entry["viewbox"],
+            node=node,
         )
 
     radicals = list(map(make, data["radicals"]))
-    return KanjiData(radicals=radicals)
+    return KanjiData(radicals=radicals, radical_list=frozenset(radical_list))

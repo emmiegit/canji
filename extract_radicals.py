@@ -6,12 +6,9 @@ import sys
 import unicodedata
 from xml.etree import ElementTree
 
-from .common import parse_xml, read_data
+from .common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY, parse_xml, read_data
 
 KANJIVG_DIRECTORY = "kanjivg/kanji"
-RADICAL_OUTPUT_DIRECTORY = "radicals"
-CHARACTER_OUTPUT_DIRECTORY = "characters"
-
 REGULAR_KANJI_PATH_REGEX = re.compile(r"(\w+)\.svg")
 
 
@@ -26,8 +23,8 @@ if __name__ == "__main__":
     os.chdir(os.path.dirname(sys.argv[0]))
 
     # Create output directory
-    os.makedirs(RADICAL_OUTPUT_DIRECTORY, exist_ok=True)
-    os.makedirs(CHARACTER_OUTPUT_DIRECTORY, exist_ok=True)
+    os.makedirs(RADICAL_DIRECTORY, exist_ok=True)
+    os.makedirs(CHARACTER_DIRECTORY, exist_ok=True)
 
     # Register XML namespaces
     ElementTree.register_namespace("", "http://www.w3.org/2000/svg")
