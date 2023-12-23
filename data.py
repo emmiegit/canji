@@ -27,7 +27,7 @@ class Radical:
     character: Optional[str]
     file: str
     position: Union[0, 1]
-    node: Optional[Element]
+    node: Element
     x: tuple[int, int]
     y: tuple[int, int]
     width: tuple[int, int]
@@ -79,7 +79,7 @@ def read_data(path="data.toml", load_radicals=True):
         if load_radicals:
             node = parse_xml(os.path.join(RADICAL_DIRECTORY, file))
         else:
-            node = None
+            node = Element("null")
 
         return Radical(
             character=char,
