@@ -1,11 +1,29 @@
 # This data file contains information used by the kanji generator system.
 # For instance, orientation and size information for radicals
-# (e.g. 犭only appears on the left and is <foo> units wide)
+
+# Example entry:
+#
+# [[radicals]]
+# char = "犭"             -- The Unicode character corresponding to this radical, if any.
+# file = "072ad.svg"      -- The path to the SVG file with this radical. Optional if "char" is given.
+# pos = 0                 -- Which position this radical takes.
+#                            For left or top radicals, it should be 0,
+#                            For right or bottom radicals, it should be 1.
+#                            This basically describes, in the lists to follow,
+#                            which item is this radical, leaving the other for the
+#                            combining character.
+# x = [0, 28]             -- The x positions for the elements. The "pos" item is the radical.
+# y = [0, 0]              -- The y positions for the elements.
+# width = [36, 90]        -- The widths for the elements.
+# height = [109, 109]     -- The heights for the elements.
+# viewbox = "0 0 42 109"  -- The viewbox to use for the radical itself.
+#                            The combining character is assumed to have the default viewbox.
 
 [[radicals]]
 char = "犭"
-# file = f"{ord(char):04x}.svg"
-x = 0
-y = 0
-width = 36
+pos = 0
+x = [0, 28]
+y = [0, 0]
+width = [36, 90]
+height = [109, 109]
 viewbox = "0 0 42 109"
