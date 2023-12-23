@@ -1,17 +1,14 @@
 import os
 import tomllib
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, Union
 from xml.etree.ElementTree import Element
 
-from common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY
+from common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY, DEFAULT_VIEWBOX, parse_xml
 
 """
 Code to read the data file for kanji processing.
 """
-
-KanjiData = namedtuple("KanjiData", ("radicals",))
-Radical = namedtuple("Radical", ("char", "file", "image"))
 
 
 @dataclass
@@ -28,8 +25,9 @@ class ImagePart:
 @dataclass
 class Radical:
     character: Optional[str]
+    file: str
     position: Union[0, 1]
-    node: Element
+    node: Optional[Element]
     x: tuple[int, int]
     y: tuple[int, int]
     width: tuple[int, int]
@@ -62,7 +60,7 @@ class KanjiData:
         return s in self.radical_list
 
 
-def read_data(path="data.toml"):
+def read_data(path="data.toml", load_radicals=True):
     with open(path, "rb") as file:
         data = tomllib.load(file)
 
@@ -78,7 +76,10 @@ def read_data(path="data.toml"):
             assert char is not None, "One of char, file must be specified!"
             file = f"{ord(char):05x}.svg"
 
-        node = parse_xml(os.path.join(RADICAL_DIRECTORY, file))
+        if load_radicals:
+            node = parse_xml(os.path.join(RADICAL_DIRECTORY, file))
+        else:
+            node = None
 
         return Radical(
             character=char,

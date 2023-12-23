@@ -6,7 +6,8 @@ import sys
 import unicodedata
 from xml.etree import ElementTree
 
-from common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY, parse_xml, read_data
+from common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY, parse_xml
+from data import read_data
 
 KANJIVG_DIRECTORY = "kanjivg/kanji"
 REGULAR_KANJI_PATH_REGEX = re.compile(r"(\w+)\.svg")
@@ -31,7 +32,7 @@ if __name__ == "__main__":
     ElementTree.register_namespace("kvg", "http://kanjivg.tagaini.net")
 
     # Load kanji data
-    data = read_data()
+    data = read_data(load_radicals=False)
 
     def is_radical(path):
         return any(map(lambda r: r.file == path, data.radicals))
@@ -51,9 +52,9 @@ if __name__ == "__main__":
 
         input_path = os.path.join(KANJIVG_DIRECTORY, path)
         output_path = os.path.join(
-            RADICAL_OUTPUT_DIRECTORY
+            RADICAL_DIRECTORY
             if is_radical(path)
-            else CHARACTER_OUTPUT_DIRECTORY,
+            else CHARACTER_DIRECTORY,
             path,
         )
 
