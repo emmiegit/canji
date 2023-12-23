@@ -6,7 +6,9 @@ from dataclasses import dataclass
 from xml.etree import ElementTree
 from xml.etree.ElementTree import Element, SubElement
 
-from .common import DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_VIEWBOX, parse_xml
+from common import DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_VIEWBOX, parse_xml
+
+XML_HEADER = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'
 
 
 @dataclass
@@ -41,6 +43,13 @@ def build_svg_from_parts(part):
         }
 
     return root
+
+
+def write_svg(path, root):
+    with open(path, "w") as file:
+        file.write(XML_HEADER)
+        file.write("\n")
+        file.write(ElementTree.tostring(root, encoding="utf-8"))
 
 
 if __name__ == "__main__":

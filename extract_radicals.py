@@ -6,7 +6,7 @@ import sys
 import unicodedata
 from xml.etree import ElementTree
 
-from .common import parse_xml
+from common import parse_xml
 
 KANJIVG_DIRECTORY = "kanjivg/kanji"
 OUTPUT_DIRECTORY = "radicals"
