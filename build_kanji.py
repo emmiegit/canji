@@ -57,9 +57,11 @@ if __name__ == "__main__":
     register_xml_namespaces()
     data = read_data()
 
-    # Generate one random character
-    radical = random.choice(data.radicals)
-    character = random.choice(data.characters)
-    parts = radical.make_parts(character)
-    svg = build_svg(parts)
-    write_svg("_output.svg", svg)
+    # Generate some random characters
+    output_dir = os.path.expanduser("~/incoming") # XXX
+    for i in range(10):
+        radical = random.choice(data.radicals)
+        character = random.choice(data.characters)
+        parts = radical.make_parts(character)
+        svg = build_svg(parts)
+        write_svg(os.path.join(output_dir, f"{i:02}.svg"), svg)
