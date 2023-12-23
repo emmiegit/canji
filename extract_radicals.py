@@ -6,7 +6,7 @@ import sys
 import unicodedata
 from xml.etree import ElementTree
 
-from .common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY, parse_xml, read_data
+from common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY, parse_xml, read_data
 
 KANJIVG_DIRECTORY = "kanjivg/kanji"
 REGULAR_KANJI_PATH_REGEX = re.compile(r"(\w+)\.svg")

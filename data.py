@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import Optional
 from xml.etree.ElementTree import Element
 
-from .common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY
+from common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY
 
 """
 Code to read the data file for kanji processing.

@@ -6,8 +6,8 @@ from copy import deepcopy
 from xml.etree import ElementTree
 from xml.etree.ElementTree import Element, SubElement
 
-from .common import DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_VIEWBOX, parse_xml
-from .data import Radical, ImagePart, read_data
+from common import DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_VIEWBOX, parse_xml
+from data import Radical, ImagePart, read_data
 
 XML_HEADER = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>'
 
