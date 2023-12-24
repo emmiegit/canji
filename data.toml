@@ -62,17 +62,6 @@ exclude = [
 # LEFT
 ###
 
-# This one sucks tbh lol
-[[radical]]
-name = "stick"
-char = "丨"
-pos = 0
-x = [0, 17]
-y = [10, 0]
-width = [25, 92]
-height = [90, 109]
-viewbox = "30 0 30 109"
-
 [[radical]]
 name = "craft"
 char = "工"
@@ -223,3 +212,20 @@ width = [78, 109]
 height = [80, 109]
 stroke = [1.28, 1]
 viewbox = "0 0 109 109"
+
+###
+# GRAVEYARD
+###
+
+# For data entries which _work_ (properly tuned and all that)
+# but kind of suck, and so are excluded from the pool.
+
+[[graveyard.radical]]
+name = "stick"
+char = "丨"
+pos = 0
+x = [0, 17]
+y = [10, 0]
+width = [25, 92]
+height = [90, 109]
+viewbox = "30 0 30 109"
