@@ -222,6 +222,21 @@ height = [36, 74]
 viewbox = "0 0 109 61"
 
 [[radical]]
+name = "recline"
+char = "𠂉"
+pos = 0
+x = [-12, 10]
+y = [0, 14]
+height = [30, 97]
+width = [126, 99]
+viewbox = "0 0 109 40"
+
+[[extraction]]
+name = "recline"
+input = "06bce.svg"
+element = "𠂉"
+
+[[radical]]
 name = "west"
 char = "覀"
 pos = 0
