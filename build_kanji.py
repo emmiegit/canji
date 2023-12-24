@@ -73,7 +73,8 @@ if __name__ == "__main__":
     # Generate some random characters
     output_dir = os.path.expanduser("~/incoming")  # XXX
     for i in range(10):
-        radical = random.choice(data.radicals)
+        #radical = random.choice(data.radicals)
+        radical = data.radical_names["street"]
         character = random.choice(data.characters)
         parts = radical.make_parts(character)
         svg = build_svg(parts)
