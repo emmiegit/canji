@@ -28,7 +28,21 @@ XML_HEADER = b'<?xml version="1.0" encoding="UTF-8" standalone="no"?>'
 
 
 def modify_stroke_thickness(element, stroke_multiplier):
-    raise NotImplementedError
+    group = element[0]
+    assert "kvg:StrokePaths" in group.attrib["id"]
+
+    # Rebuild inline CSS with multiplied stroke-width value.
+    style_parts = group.attrib["style"].split(";")
+    for i, style_part in enumerate(style_parts):
+        key, value = style_part.split(":")
+        if "key" != "stroke-width":
+            continue
+
+        new_value = float(value) * stroke_multiplier
+        style_parts[i] = f"stroke-width:{new_value}"
+
+    # Replace with rebuilt inline CSS
+    group.attrib["style"] = ";".join(style_parts)
 
 
 def build_svg(parts: Iterable[ImagePart]):
