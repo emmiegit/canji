@@ -119,8 +119,8 @@ element = "禾"
 name = "beast"
 char = "犭"
 pos = 0
-x = [0, 30]
-width = [36, 82]
+x = [0, 31]
+width = [39, 87]
 viewbox = "0 0 42 109"
 
 [[radical]]
