@@ -11,7 +11,7 @@ from typing import Optional, Union
 from xml.etree import ElementTree
 from xml.etree.ElementTree import Element
 
-from common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY, DEFAULT_VIEWBOX, SVG_KVG_PREFIX, parse_xml
+from common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY, DEFAULT_VIEWBOX, XML_KVG_PREFIX, parse_xml
 from charid import char_to_hex
 
 SVG_FILENAME_REGEX = re.compile(r"([0-9a-f]+)\.svg")
