@@ -54,9 +54,9 @@ viewbox = "0 0 42 109"
 name = "west"
 char = "⻃"
 pos = 0
-x = [-6, 0]
+x = [0, 0]
 y = [0, 26]
-width = [121, 109]
+width = [109, 109]
 height = [33, 72]
 viewbox = "0 0 109 51"
 
