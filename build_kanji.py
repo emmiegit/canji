@@ -27,6 +27,10 @@ from data import Radical, ImagePart, read_data
 XML_HEADER = b'<?xml version="1.0" encoding="UTF-8" standalone="no"?>'
 
 
+def modify_stroke_thickness(element, stroke_multiplier):
+    raise NotImplementedError
+
+
 def build_svg(parts: Iterable[ImagePart]):
     root = Element(
         "svg",
@@ -47,6 +51,8 @@ def build_svg(parts: Iterable[ImagePart]):
             "viewBox": part.viewbox,
             "preserveAspectRatio": "none",
         }
+        if part.stroke_multiplier != 1:
+            modify_stroke_thickness(element, part.stroke_multiplier)
         root.append(element)
 
     ElementTree.indent(root, space="\t", level=0)

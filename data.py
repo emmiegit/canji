@@ -23,6 +23,7 @@ class ImagePart:
     y: int
     width: int
     height: int
+    stroke_multiplier: float
     viewbox: str = DEFAULT_VIEWBOX
 
 
@@ -51,6 +52,7 @@ class Radical:
     y: tuple[int, int]
     width: tuple[int, int]
     height: tuple[int, int]
+    stroke_multiplier: tuple[float, float]
     viewbox: str
     _tree: Optional[ElementTree] = None
     _node: Optional[Element] = None
@@ -72,6 +74,7 @@ class Radical:
                     y=self.y[pos],
                     width=self.width[pos],
                     height=self.height[pos],
+                    stroke_multiplier=self.stroke_multiplier[pos],
                     character=self.character if this else other.character,
                     node=self.node if this else other.node,
                     viewbox=self.viewbox if this else DEFAULT_VIEWBOX,
@@ -116,6 +119,7 @@ def read_data(path="data.toml"):
             y=entry["y"],
             width=entry["width"],
             height=entry["height"],
+            stroke_multiplier=entry["stroke"],
             viewbox=entry["viewbox"],
         )
 
