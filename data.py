@@ -140,6 +140,9 @@ def read_data(path="data.toml"):
             viewbox=entry.get("viewbox", DEFAULT_VIEWBOX),
         )
 
+        # Sanity checking
+        assert 0 not in radical.stroke_multiplier, "Multiplier of 0 probably unintended"
+
         if char is not None:
             radical_set.add(char)
 
