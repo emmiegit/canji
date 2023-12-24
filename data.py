@@ -145,6 +145,20 @@ class KanjiData:
     def extractions_count(self) -> int:
         return sum(len(v) for v in self.extractions.values())
 
+    def character_by_id(self, id) -> Character:
+        if len(id) == 1:
+            # Assuming to be character
+            condition = lambda c: c.character == id
+        else:
+            # Assuming to be path
+            condition = lambda c: c.path == id
+
+        for character in self.characters:
+            if condition(character):
+                return character
+
+        raise ValueError(f"No character found with ID {id}")
+
 
 def weight(node):
     this_weight = int(f"{XML_KVG_PREFIX}element" in node.attrib)
