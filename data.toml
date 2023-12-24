@@ -15,6 +15,7 @@ exclude = [
     "个",
     "丶",
     "亅",
+    "⻃",
     "⺨",
 ]
 
@@ -74,13 +75,7 @@ viewbox = "30 0 30 109"
 # TOP
 ###
 
-[[radical]]
-name = "west"
-char = "⻃"
-pos = 0
-y = [0, 26]
-height = [33, 72]
-viewbox = "0 0 109 51"
+# TODO
 
 ###
 # BOTTOM
@@ -148,6 +143,19 @@ name = "outhouse"
 input = "05802.svg"
 output = "2ba60.svg"
 element = "尚"
+
+[[extraction]]
+name = "west"
+input = "08981.svg"
+element = "覀"
+
+[[radical]]
+name = "west"
+char = "覀"
+pos = 0
+y = [0, 28]
+height = [34, 72]
+viewbox = "0 0 109 51"
 
 [[extraction]]
 name = "horse-left"

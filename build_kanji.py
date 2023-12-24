@@ -82,7 +82,7 @@ if __name__ == "__main__":
     output_dir = os.path.expanduser("~/incoming")  # XXX
     for i in range(10):
         # radical = random.choice(data.radicals)
-        radical = data.radical_names["horse"]
+        radical = data.radical_names["west"]
         character = random.choice(data.characters)
         parts = radical.make_parts(character)
         svg = build_svg_from_parts(parts)
