@@ -48,24 +48,6 @@ width = [25, 92]
 height = [90, 109]
 viewbox = "30 0 30 109"
 
-[[radical]]
-name = "grain"
-char = "禾"
-pos = 0
-x = [0, 30]
-width = [40, 79]
-viewbox = "0 0 47 109"
-copy = false
-
-[[radical]]
-name = "craft"
-char = "工"
-pos = 0
-x = [0, 32]
-width = [40, 77]
-viewbox = "0 0 50 109"
-copy = false
-
 ###
 # RIGHT
 ###
@@ -113,6 +95,8 @@ viewbox = "0 0 109 109"
 
 ###
 # Extractions section
+#
+# also has extracted radicals (no copy)
 ###
 
 [[extraction]]
@@ -121,11 +105,29 @@ input = "079d5.svg"
 output = "079be.svg"
 element = "禾"
 
+[[radical]]
+name = "grain"
+char = "禾"
+pos = 0
+x = [0, 30]
+width = [40, 79]
+viewbox = "0 0 47 109"
+copy = false
+
 [[extraction]]
 name = "craft-left"
 input = "05de7.svg"
 output = "05de5.svg"
 element = "工"
+
+[[radical]]
+name = "craft"
+char = "工"
+pos = 0
+x = [0, 32]
+width = [40, 77]
+viewbox = "0 0 50 109"
+copy = false
 
 [[extraction]]
 name = "outhouse"
