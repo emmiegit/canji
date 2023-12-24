@@ -14,6 +14,7 @@ from xml.etree.ElementTree import Element
 
 from alive_progress import alive_bar
 
+from charid import hex_to_char
 from common import (
     RADICAL_DIRECTORY,
     CHARACTER_DIRECTORY,
@@ -89,7 +90,7 @@ if __name__ == "__main__":
                 continue
 
             # Skip, based on categorization of character
-            char = chr(int(match[1], 16))
+            char = hex_to_char(match[1])
             char_name = unicodedata.name(char)
             if "CJK" not in char_name:
                 bar(skipped=True)

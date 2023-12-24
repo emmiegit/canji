@@ -100,6 +100,7 @@ class KanjiData:
     radical_names: dict[str, Radical]
     radicals: list[Radical]
     characters: list[Character]
+    characters_exclude: frozenset[str]
     extractions: dict[str, Extraction]
 
     def is_radical(self, s: str) -> bool:
@@ -185,5 +186,6 @@ def read_data(path="data.toml"):
         radical_set=frozenset(radical_set),
         radical_names=radical_names,
         characters=characters,
+        characters_exclude=frozenset(data["exclude"]),
         extractions=extractions,
     )
