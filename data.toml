@@ -148,3 +148,13 @@ name = "outhouse"
 input = "05802.svg"
 output = "2ba60.svg"
 element = "尚"
+
+[[extraction]]
+name = "horse-left"
+input = "099bc.svg"
+element = "馬"
+
+[[extraction]]
+name = "culture-right"
+input = "099bc.svg"
+element = "文"
