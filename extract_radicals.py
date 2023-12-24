@@ -32,16 +32,16 @@ KANJIVG_DIRECTORY = "kanjivg/kanji"
 REGULAR_KANJI_PATH_REGEX = re.compile(r"(\w+)\.svg")
 
 
-def find_element(root, element):
+def find_element(node, element):
     svg_prefix = f"{{{XML_SVG_URL}}}"
     kvg_prefix = f"{{{XML_KVG_URL}}}"
     if (
-        root.tag == f"{svg_prefix}g"
-        and root.attrib.get(f"{kvg_prefix}element") == element
+        node.tag == f"{svg_prefix}g"
+        and node.attrib.get(f"{kvg_prefix}element") == element
     ):
-        return root
+        return node
 
-    for child in root:
+    for child in node:
         result = find_element(child, element)
         if result is not None:
             return result
