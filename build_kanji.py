@@ -133,7 +133,16 @@ if __name__ == "__main__":
         help="Use the fancy progress bar. Requires alive_progress dependency to be installed.",
     )
     args = argparser.parse_args()
-    make_bar = alive_bar if args.fancy_progress else dummy_bar
+    make_bar = alive_bar if args.fancy_progress else DummyBar
+    output = os.path.abspath(args.output)
+
+    # Normalize current directory
+    os.chdir(os.path.dirname(sys.argv[0]))
+
+    # Setup
+    register_xml_namespaces()
+    data = read_data(args.data_file)
+
     radicals = (
         [data.radical_names[n] for n in args.radicals]
         if args.radicals
@@ -144,14 +153,6 @@ if __name__ == "__main__":
         if args.characters
         else data.characters
     )
-    output = os.path.abspath(args.output)
-
-    # Normalize current directory
-    os.chdir(os.path.dirname(sys.argv[0]))
-
-    # Setup
-    register_xml_namespaces()
-    data = read_data(args.data_file)
 
     # Special handling for single-character generation
     if args.count == 1:

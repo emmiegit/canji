@@ -235,7 +235,7 @@ def read_data(path="data.toml"):
         element = entry["element"]
 
         if output is None:
-            output = f"{char_to_hex(element)}.svg"
+            output = char_to_file(element)
 
         extractions[input].append(
             Extraction(
