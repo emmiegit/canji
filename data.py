@@ -76,6 +76,13 @@ class Radical:
         return self._node
 
     def make_parts(self, other: Character) -> list[ImagePart]:
+        # Determine character weight, see if we need to squash even more
+        ratio = weight(self.node) / weight(other.node)
+        ratios = (ratio, 1.0 - ratio)
+        if self.position == 1:
+            ratios = (ratios[1], ratios[0])
+
+        # Build image parts for construction
         parts = []
         for pos in (0, 1):
             this = self.position == pos
