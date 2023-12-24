@@ -165,12 +165,14 @@ def read_data(path="data.toml"):
         output = entry["output"]
         element = entry["element"]
 
-        extractions[input].append(Extraction(
-            name=name,
-            input=input,
-            output=output,
-            element=element,
-        ))
+        extractions[input].append(
+            Extraction(
+                name=name,
+                input=input,
+                output=output,
+                element=element,
+            )
+        )
 
     radicals = list(map(make_radical, data["radical"]))
     characters = list(map(make_character, os.listdir(CHARACTER_DIRECTORY)))

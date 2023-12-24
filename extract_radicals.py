@@ -13,7 +13,15 @@ from xml.etree import ElementTree
 
 from alive_progress import alive_bar
 
-from common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY, XML_KVG_URL, XML_SVG_URL, parse_xml, register_xml_namespaces
+from common import (
+    RADICAL_DIRECTORY,
+    CHARACTER_DIRECTORY,
+    XML_KVG_URL,
+    XML_SVG_URL,
+    parse_xml,
+    register_xml_namespaces,
+    write_svg,
+)
 from data import read_data
 
 KANJIVG_DIRECTORY = "kanjivg/kanji"
@@ -29,7 +37,10 @@ def process_kanji(root):
 def find_element(root, element):
     svg_prefix = f"{{{XML_SVG_URL}}}"
     kvg_prefix = f"{{{XML_KVG_URL}}}"
-    if root.tag == f"{svg_prefix}g" and root.attrib.get(f"{kvg_prefix}element") == element:
+    if (
+        root.tag == f"{svg_prefix}g"
+        and root.attrib.get(f"{kvg_prefix}element") == element
+    ):
         return root
 
     for child in root:
@@ -90,4 +101,5 @@ if __name__ == "__main__":
                 extracted = find_element(root, extraction.element)
                 assert extracted, "Could not find element to extract"
                 output_path = os.path.join(RADICAL_DIRECTORY, extraction.output)
-                extracted.write(output_path, encoding="utf-8")
+                write_svg(output_path, extracted)
+                bar()

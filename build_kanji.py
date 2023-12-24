@@ -20,11 +20,10 @@ from common import (
     DEFAULT_HEIGHT,
     DEFAULT_VIEWBOX,
     parse_xml,
+    write_svg,
     register_xml_namespaces,
 )
 from data import Radical, ImagePart, read_data
-
-XML_HEADER = b'<?xml version="1.0" encoding="UTF-8" standalone="no"?>'
 
 
 def modify_stroke_thickness(element, stroke_multiplier):
@@ -77,13 +76,6 @@ def build_svg(parts: Iterable[ImagePart]):
     return root
 
 
-def write_svg(path, root):
-    with open(path, "wb") as file:
-        file.write(XML_HEADER)
-        file.write(b"\n")
-        file.write(ElementTree.tostring(root, encoding="utf-8"))
-
-
 if __name__ == "__main__":
     # TODO
 
@@ -97,8 +89,8 @@ if __name__ == "__main__":
     # Generate some random characters
     output_dir = os.path.expanduser("~/incoming")  # XXX
     for i in range(10):
-        #radical = random.choice(data.radicals)
-        radical = data.radical_names["west"]
+        # radical = random.choice(data.radicals)
+        radical = data.radical_names["grain"]
         character = random.choice(data.characters)
         parts = radical.make_parts(character)
         svg = build_svg(parts)
