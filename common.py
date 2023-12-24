@@ -12,9 +12,11 @@ DEFAULT_WIDTH = 109
 DEFAULT_HEIGHT = 109
 DEFAULT_VIEWBOX = f"0 0 {DEFAULT_WIDTH} {DEFAULT_HEIGHT}"
 
+XML_SVG_URL = "http://www.w3.org/2000/svg"
+XML_KVG_URL = "http://kanjivg.tagaini.net"
 XML_PREFIX_MAP = {
-    "": "http://www.w3.org/2000/svg",
-    "kvg": "http://kanjivg.tagaini.net",
+    "": XML_SVG_URL,
+    "kvg": XML_KVG_URL,
 }
 
 

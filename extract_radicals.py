@@ -13,7 +13,7 @@ from xml.etree import ElementTree
 
 from alive_progress import alive_bar
 
-from common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY, parse_xml, register_xml_namespaces
+from common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY, XML_KVG_URL, XML_SVG_URL, parse_xml, register_xml_namespaces
 from data import read_data
 
 KANJIVG_DIRECTORY = "kanjivg/kanji"
@@ -24,6 +24,20 @@ def process_kanji(root):
     # Delete stroke order
     assert "StrokeNumbers" in root[1].get("id", "")
     del root[1]
+
+
+def find_element(root, element):
+    svg_prefix = f"{{{XML_SVG_URL}}}"
+    kvg_prefix = f"{{{XML_KVG_URL}}}"
+    if root.tag == f"{svg_prefix}g" and root.attrib.get(f"{kvg_prefix}element") == element:
+        return root
+
+    for child in root:
+        result = find_element(child, element)
+        if result is not None:
+            return result
+
+    return None
 
 
 if __name__ == "__main__":
@@ -70,3 +84,10 @@ if __name__ == "__main__":
             process_kanji(root)
             tree.write(output_path, encoding="utf-8")
             bar()
+
+            # If we have any extractions from this character, then do those
+            for extraction in data.extractions[path]:
+                extracted = find_element(root, extraction.element)
+                assert extracted, "Could not find element to extract"
+                output_path = os.path.join(RADICAL_DIRECTORY, extraction.output)
+                extracted.write(output_path, encoding="utf-8")
