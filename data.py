@@ -100,15 +100,15 @@ def read_data(path="data.toml"):
 
     def make_radical(entry):
         char = entry.get("char")
-        if char is not None:
-            radical_set.add(char)
-
+        name = entry.get("name")
         file = entry.get("file")
+
         if file is None:
             assert char is not None, "One of char, file must be specified!"
             file = f"{ord(char):05x}.svg"
 
         radical = Radical(
+            name=name,
             character=char,
             path=os.path.join(RADICAL_DIRECTORY, file),
             position=entry["pos"],
@@ -119,7 +119,9 @@ def read_data(path="data.toml"):
             viewbox=entry["viewbox"],
         )
 
-        name = entry.get("name")
+        if char is not None:
+            radical_set.add(char)
+
         if name is not None:
             assert name not in radical_names, f"Radical name {name} is not unique!"
             radical_names[name] = radical
