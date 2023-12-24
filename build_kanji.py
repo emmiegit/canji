@@ -60,6 +60,7 @@ def build_svg_from_parts(parts: Iterable[ImagePart]):
                 "height": str(part.height),
                 "viewBox": part.viewbox,
                 "preserveAspectRatio": "none",
+                "kvg:element": "".join(p.character for p in parts if p.character),
             }
             if part.stroke_multiplier != 1:
                 modify_stroke_thickness(element, part.stroke_multiplier)
