@@ -175,7 +175,13 @@ element = "尚"
 # BOTTOM
 ###
 
-# TODO
+[[radical]]
+name = "heart-bottom"
+char = "心"
+pos = 1
+y = [0, 18]
+height = [75, 88]
+viewbox = "0 0 109 109"
 
 [[extraction]]
 name = "heart-bottom"
