@@ -11,6 +11,8 @@ import sys
 import unicodedata
 from xml.etree import ElementTree
 
+from alive_progress import alive_bar
+
 from common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY, parse_xml, register_xml_namespaces
 from data import read_data
 
@@ -40,24 +42,30 @@ if __name__ == "__main__":
         return any(map(lambda r: os.path.basename(r.path) == file, data.radicals))
 
     # Process KanjiVG files
-    for path in os.listdir(KANJIVG_DIRECTORY):
-        # Skip, only consider non-variants
-        match = REGULAR_KANJI_PATH_REGEX.fullmatch(path)
-        if match is None:
-            continue
+    print("Processing KanjiVG files...")
+    kanjivg_paths = os.listdir(KANJIVG_DIRECTORY)
+    with alive_bar(len(kanjivg_paths)) as bar:
+        for path in kanjivg_paths:
+            # Skip, only consider non-variants
+            match = REGULAR_KANJI_PATH_REGEX.fullmatch(path)
+            if match is None:
+                bar(skipped=True)
+                continue
 
-        # Skip, based on categorization of character
-        char = chr(int(match[1], 16))
-        char_name = unicodedata.name(char)
-        if "CJK" not in char_name:
-            continue
+            # Skip, based on categorization of character
+            char = chr(int(match[1], 16))
+            char_name = unicodedata.name(char)
+            if "CJK" not in char_name:
+                bar(skipped=True)
+                continue
 
-        input_path = os.path.join(KANJIVG_DIRECTORY, path)
-        output_path = os.path.join(
-            RADICAL_DIRECTORY if is_radical(path) else CHARACTER_DIRECTORY,
-            path,
-        )
+            input_path = os.path.join(KANJIVG_DIRECTORY, path)
+            output_path = os.path.join(
+                RADICAL_DIRECTORY if is_radical(path) else CHARACTER_DIRECTORY,
+                path,
+            )
 
-        tree, root = parse_xml(input_path)
-        process_kanji(root)
-        tree.write(output_path, encoding="utf-8")
+            tree, root = parse_xml(input_path)
+            process_kanji(root)
+            tree.write(output_path, encoding="utf-8")
+            bar()
