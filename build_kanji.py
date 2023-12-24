@@ -19,6 +19,7 @@ from common import (
     DEFAULT_WIDTH,
     DEFAULT_HEIGHT,
     DEFAULT_VIEWBOX,
+    build_svg,
     parse_xml,
     write_svg,
     register_xml_namespaces,
@@ -48,32 +49,23 @@ def modify_stroke_thickness(element, stroke_multiplier):
     group.attrib["style"] = ";".join(style_parts)
 
 
-def build_svg(parts: Iterable[ImagePart]):
-    root = Element(
-        "svg",
-        attrib={
-            "width": str(DEFAULT_WIDTH),
-            "height": str(DEFAULT_HEIGHT),
-            "viewBox": str(DEFAULT_VIEWBOX),
-        },
-    )
+def build_svg_from_parts(parts: Iterable[ImagePart]):
+    def inner(root):
+        for part in parts:
+            element = deepcopy(part.node)
+            element.attrib = {
+                "x": str(part.x),
+                "y": str(part.y),
+                "width": str(part.width),
+                "height": str(part.height),
+                "viewBox": part.viewbox,
+                "preserveAspectRatio": "none",
+            }
+            if part.stroke_multiplier != 1:
+                modify_stroke_thickness(element, part.stroke_multiplier)
+            root.append(element)
 
-    for part in parts:
-        element = deepcopy(part.node)
-        element.attrib = {
-            "x": str(part.x),
-            "y": str(part.y),
-            "width": str(part.width),
-            "height": str(part.height),
-            "viewBox": part.viewbox,
-            "preserveAspectRatio": "none",
-        }
-        if part.stroke_multiplier != 1:
-            modify_stroke_thickness(element, part.stroke_multiplier)
-        root.append(element)
-
-    ElementTree.indent(root, space="\t", level=0)
-    return root
+    return build_svg(inner)
 
 
 if __name__ == "__main__":
@@ -93,5 +85,5 @@ if __name__ == "__main__":
         radical = data.radical_names["grain"]
         character = random.choice(data.characters)
         parts = radical.make_parts(character)
-        svg = build_svg(parts)
+        svg = build_svg_from_parts(parts)
         write_svg(os.path.join(output_dir, f"{i:02}.svg"), svg)

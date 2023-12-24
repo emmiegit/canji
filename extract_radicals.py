@@ -10,12 +10,14 @@ import re
 import sys
 import unicodedata
 from xml.etree import ElementTree
+from xml.etree.ElementTree import Element
 
 from alive_progress import alive_bar
 
 from common import (
     RADICAL_DIRECTORY,
     CHARACTER_DIRECTORY,
+    DEFAULT_VIEWBOX,
     XML_KVG_URL,
     XML_SVG_URL,
     parse_xml,
@@ -98,8 +100,11 @@ if __name__ == "__main__":
 
             # If we have any extractions from this character, then do those
             for extraction in data.extractions[path]:
-                extracted = find_element(root, extraction.element)
+                bar()
+
+            def make_svg_from_extraction(root, element):
+                extracted = find_element(root, element)
                 assert extracted, "Could not find element to extract"
                 output_path = os.path.join(RADICAL_DIRECTORY, extraction.output)
-                write_svg(output_path, extracted)
-                bar()
+                svg = build_svg(lambda root: root.append(extracted))
+                write_svg(output_path, svg)

@@ -4,6 +4,7 @@ Common functions and concepts used by multiple scripts
 
 from collections import namedtuple
 from xml.etree import ElementTree
+from xml.etree.ElementTree import Element
 
 RADICAL_DIRECTORY = "radicals"
 CHARACTER_DIRECTORY = "characters"
@@ -31,6 +32,20 @@ def parse_xml(path):
     root = tree.getroot()
     assert root.tag == "{http://www.w3.org/2000/svg}svg"
     return tree, root
+
+
+def build_svg(inner) -> Element:
+    root = Element(
+        "svg",
+        attrib={
+            "width": str(DEFAULT_WIDTH),
+            "height": str(DEFAULT_HEIGHT),
+            "viewBox": DEFAULT_VIEWBOX,
+        },
+    )
+    inner(root)
+    ElementTree.indent(root, space="\t", level=0)
+    return root
 
 
 def write_svg(path, root):
