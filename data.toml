@@ -130,6 +130,20 @@ name = "horse-left"
 input = "099bc.svg"
 element = "馬"
 
+[[radical]]
+name = "fish"
+char = "魚"
+pos = 0
+x = [0, 31]
+width = [40, 78]
+viewbox = "0 0 50 109"
+copy = false
+
+[[extraction]]
+name = "fish-left"
+input = "09c09.svg"
+element = "魚"
+
 ###
 # RIGHT
 ###
