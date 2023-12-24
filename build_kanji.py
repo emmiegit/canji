@@ -6,6 +6,8 @@ Uses the radical positioning information in data.toml
 and the extracted radical and character SVGs from extract_radicals.py
 """
 
+import argparse
+import math
 import os
 import random
 import sys
@@ -14,6 +16,11 @@ from copy import deepcopy
 from typing import Iterable
 from xml.etree import ElementTree
 from xml.etree.ElementTree import Element, SubElement
+
+try:
+    from alive_progress import alive_bar
+except ImportError:
+    from dummy_bar import DummyBar as alive_bar
 
 from common import (
     DEFAULT_WIDTH,
@@ -25,6 +32,7 @@ from common import (
     register_xml_namespaces,
 )
 from data import Radical, ImagePart, read_data
+from dummy_bar import DummyBar
 
 
 def modify_stroke_thickness(element, stroke_multiplier):
@@ -69,23 +77,93 @@ def build_svg_from_parts(parts: Iterable[ImagePart]):
     return build_svg(inner, add_style=False)
 
 
+def generate(radicals, characters):
+    radical = random.choice(radicals)
+    character = random.choice(characters)
+    parts = radical.make_parts(character)
+    return build_svg_from_parts(parts)
+
+
 if __name__ == "__main__":
-    # TODO
+    # Process command-line arguments
+    argparser = argparse.ArgumentParser(description="Procedurally generate kanji")
+    argparser.add_argument(
+        "-c",
+        "--count",
+        dest="count",
+        type=int,
+        default=10,
+        help="The number of kanji to generate",
+    )
+    argparser.add_argument(
+        "-o",
+        "--output",
+        dest="output",
+        default=".",
+        help="The directory to write generated kanji into. If only one character is being generated, this is treated as a target path instead.",
+    )
+    argparser.add_argument(
+        "-d",
+        "--data",
+        dest="data_file",
+        default="data.toml",
+        help="The data file to use in generation. Path is relative to the location of this script.",
+    )
+    argparser.add_argument(
+        "-r",
+        "--radical",
+        dest="radicals",
+        nargs="*",
+        help="List of radicals (by data file name) to use in generation. Default is randomly choose among all.",
+    )
+    argparser.add_argument(
+        "-C",
+        "--char",
+        "--character",
+        dest="characters",
+        nargs="*",
+        help="List of characters (by character value or filename) to use in generation. Default is randomly choose among all.",
+    )
+    argparser.add_argument(
+        "-p",
+        "--progress",
+        "--fancy-progress",
+        dest="fancy_progress",
+        action="store_true",
+        help="Use the fancy progress bar. Requires alive_progress dependency to be installed.",
+    )
+    args = argparser.parse_args()
+    make_bar = alive_bar if args.fancy_progress else dummy_bar
+    radicals = (
+        [data.radical_names[n] for n in args.radicals]
+        if args.radicals
+        else data.radicals
+    )
+    characters = (
+        [data.character_by_id(n) for n in args.characters]
+        if args.characters
+        else data.characters
+    )
+    output = os.path.abspath(args.output)
 
     # Normalize current directory
     os.chdir(os.path.dirname(sys.argv[0]))
 
     # Setup
     register_xml_namespaces()
-    data = read_data()
+    data = read_data(args.data_file)
+
+    # Special handling for single-character generation
+    if args.count == 1:
+        svg = generate(radicals, characters)
+        write_svg(output, svg)
+        sys.exit(0)
 
     # Generate some random characters
-    output_dir = os.path.expanduser("~/incoming")  # XXX
-    for i in range(10):
-        radical = random.choice(data.radicals)
-        # radical = data.radical_names["rice"]
-        character = random.choice(data.characters)
-        # character = data.characters[i]
-        parts = radical.make_parts(character)
-        svg = build_svg_from_parts(parts)
-        write_svg(os.path.join(output_dir, f"{i:02}.svg"), svg)
+    idx_width = math.ceil(math.log10(args.count + 1))
+    with make_bar(args.count) as bar:
+        for i in range(args.count):
+            svg = generate(radicals, characters)
+            idx = str(i).zfill(idx_width)
+            write_svg(os.path.join(output, f"{idx}.svg"), svg)
+            bar()

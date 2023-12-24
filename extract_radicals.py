@@ -77,7 +77,9 @@ if __name__ == "__main__":
     data = read_data()
 
     def is_radical(file):
-        return any(map(lambda r: os.path.basename(r.path) == file and r.copy, data.radicals))
+        return any(
+            map(lambda r: os.path.basename(r.path) == file and r.copy, data.radicals)
+        )
 
     # Process KanjiVG files
     print("Processing KanjiVG files...")

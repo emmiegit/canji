@@ -4,6 +4,7 @@ Stubbed version of alive_progress.alive_bar for when it's disabled or not import
 
 from contextlib import AbstractContextManager
 
+
 class DummyBar(AbstractContextManager):
     def __init__(self, *args, **kwargs):
         pass
