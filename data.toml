@@ -279,8 +279,8 @@ element = "心"
 name = "human-legs"
 char = "儿"
 pos = 1
-y = [0, 34]
-height = [65, 52]
+y = [0, 44]
+height = [86, 71]
 
 [[extraction]]
 name = "human-legs"
