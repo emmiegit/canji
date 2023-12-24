@@ -16,8 +16,14 @@
 # y = [0, 0]              -- The y positions for the elements.
 # width = [34, 85]        -- The widths for the elements.
 # height = [109, 109]     -- The heights for the elements.
+# stroke = [1, 1.2]       -- The factor to multiply each of the radicals' stroke width by.
+#                            Optional, if excluded value is [1, 1] (leave unchanged).
 # viewbox = "0 0 42 109"  -- The viewbox to use for the radical itself.
 #                            The combining character is assumed to have the default viewbox.
+
+###
+# LEFT
+###
 
 [[radicals]]
 char = "犭"
@@ -27,3 +33,17 @@ y = [0, 0]
 width = [36, 85]
 height = [109, 109]
 viewbox = "0 0 42 109"
+
+###
+# CORNER
+###
+
+[[radicals]]
+char = "⻌"
+pos = 1
+x = [26, 0]
+y = [5, 0]
+width = [78, 109]
+height = [90, 109]
+stroke = [1.28, 1]
+viewbox = "0 0 109 109"
