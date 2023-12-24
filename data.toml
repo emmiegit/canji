@@ -167,6 +167,14 @@ element = "文"
 ###
 
 [[radical]]
+name = "top-hat"
+char = "亠"
+pos = 0
+y = [0, 29]
+height = [36, 74]
+viewbox = "0 0 109 61"
+
+[[radical]]
 name = "west"
 char = "覀"
 pos = 0
