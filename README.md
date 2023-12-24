@@ -13,6 +13,14 @@ First we need to initialize the KanjiVG submodule since that's what we use as th
 git submodule init
 ```
 
+Now we need to install pip dependencies. On my machine, I need to create a virtual environment and install the dependencies there. Alternatively, you can get the dependencies through another means.
+
+```sh
+python -m venv env
+source env/bin/activate
+pip install -r requirements.txt
+```
+
 Then, we need to extract and process radicals as separate SVGs. This involves both pulling out component radicals (e.g. 亻or 糹), it also copies full characters like 頑.
 
 ```sh
