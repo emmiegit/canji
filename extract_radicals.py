@@ -19,8 +19,8 @@ from common import (
     RADICAL_DIRECTORY,
     CHARACTER_DIRECTORY,
     DEFAULT_VIEWBOX,
-    XML_KVG_URL,
-    XML_SVG_URL,
+    XML_KVG_PREFIX,
+    XML_SVG_PREFIX,
     build_svg,
     parse_xml,
     register_xml_namespaces,
@@ -33,11 +33,9 @@ REGULAR_KANJI_PATH_REGEX = re.compile(r"(\w+)\.svg")
 
 
 def find_element(node, element):
-    svg_prefix = f"{{{XML_SVG_URL}}}"
-    kvg_prefix = f"{{{XML_KVG_URL}}}"
     if (
-        node.tag == f"{svg_prefix}g"
-        and node.attrib.get(f"{kvg_prefix}element") == element
+        node.tag == f"{XML_SVG_PREFIX}g"
+        and node.attrib.get(f"{XML_KVG_PREFIX}element") == element
     ):
         return node
 

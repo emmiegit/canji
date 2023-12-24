@@ -16,6 +16,8 @@ DEFAULT_VIEWBOX = f"0 0 {DEFAULT_WIDTH} {DEFAULT_HEIGHT}"
 XML_HEADER = b'<?xml version="1.0" encoding="UTF-8" standalone="no"?>'
 XML_SVG_URL = "http://www.w3.org/2000/svg"
 XML_KVG_URL = "http://kanjivg.tagaini.net"
+XML_SVG_PREFIX = f"{{{XML_SVG_URL}}}"
+XML_KVG_PREFIX = f"{{{XML_KVG_URL}}}"
 XML_PREFIX_MAP = {
     "": XML_SVG_URL,
     "kvg": XML_KVG_URL,
