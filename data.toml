@@ -236,6 +236,17 @@ height = [109, 68]
 stroke = [1, 1.25]
 weight = false
 
+[[radical]]
+name = "shoebox"
+char = "匚"
+pos = 0
+x = [0, 23]
+y = [0, 18]
+width = [109, 68]
+height = [109, 68]
+stroke = [1, 1.57]
+weight = false
+
 ###
 # CORNER
 ###
