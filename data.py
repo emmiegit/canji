@@ -12,6 +12,7 @@ from xml.etree import ElementTree
 from xml.etree.ElementTree import Element
 
 from common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY, DEFAULT_VIEWBOX, parse_xml
+from charid import char_to_hex
 
 SVG_FILENAME_REGEX = re.compile(r"([0-9a-f]+)\.svg")
 
@@ -122,7 +123,7 @@ def read_data(path="data.toml"):
 
         if file is None:
             assert char is not None, "One of char, file must be specified!"
-            file = f"{ord(char):05x}.svg"
+            file = f"{char_to_hex(char)}.svg"
 
         radical = Radical(
             name=name,
