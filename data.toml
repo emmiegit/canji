@@ -21,6 +21,8 @@ exclude = [
 
 ###
 # Radicals section
+#
+# also includes extractions next to the radical it pulls
 ###
 
 # [[radical]]
@@ -43,17 +45,19 @@ exclude = [
 # viewbox = "0 0 42 109"  -- The viewbox to use for the radical itself.
 #                            The combining character is assumed to have the default viewbox.
 
+# [[extraction]]
+# name = "grain-left"     -- A convenient label for this version of this radical.
+# input = "079d5.svg"     -- The file that this radical is being extracted from.
+# output = "079be.svg"    -- The output file to write to. Optional.
+#                            By default this is the hex version of "element",
+#                            but this must be overridden if element is multiple
+#                            characters or the target is incorrect or already used
+#                            by another radical file.
+# element = "禾"          -- The value for "kvg:element" to look for.
+
 ###
 # LEFT
 ###
-
-[[radical]]
-name = "beast"
-char = "犭"
-pos = 0
-x = [0, 30]
-width = [36, 82]
-viewbox = "0 0 42 109"
 
 [[radical]]
 name = "stick"
@@ -65,17 +69,89 @@ width = [25, 92]
 height = [90, 109]
 viewbox = "30 0 30 109"
 
+[[extraction]]
+name = "craft-left"
+input = "05de7.svg"
+element = "工"
+
+[[radical]]
+name = "craft"
+char = "工"
+pos = 0
+x = [0, 32]
+width = [40, 77]
+viewbox = "0 0 50 109"
+copy = false
+
+[[radical]]
+name = "grain"
+char = "禾"
+pos = 0
+x = [0, 30]
+width = [40, 79]
+viewbox = "0 0 47 109"
+copy = false
+
+[[extraction]]
+name = "grain-left"
+input = "079d5.svg"
+element = "禾"
+
+[[radical]]
+name = "beast"
+char = "犭"
+pos = 0
+x = [0, 30]
+width = [36, 82]
+viewbox = "0 0 42 109"
+
+[[radical]]
+name = "horse"
+char = "馬"
+pos = 0
+x = [0, 33]
+width = [40, 76]
+viewbox = "0 0 50 109"
+copy = false
+
+[[extraction]]
+name = "horse-left"
+input = "099bc.svg"
+element = "馬"
+
 ###
 # RIGHT
 ###
 
 # TODO
 
+[[extraction]]
+name = "culture-right"
+input = "099bc.svg"
+element = "文"
+
 ###
 # TOP
 ###
 
-# TODO
+[[radical]]
+name = "west"
+char = "覀"
+pos = 0
+y = [0, 28]
+height = [34, 72]
+viewbox = "0 0 109 51"
+
+[[extraction]]
+name = "west"
+input = "08981.svg"
+element = "覀"
+
+[[extraction]]
+name = "outhouse"
+input = "05802.svg"
+output = "2ba60.svg"
+element = "尚"
 
 ###
 # BOTTOM
@@ -103,75 +179,3 @@ width = [78, 109]
 height = [80, 109]
 stroke = [1.28, 1]
 viewbox = "0 0 109 109"
-
-###
-# Extractions section
-#
-# also has extracted radicals (no copy)
-###
-
-[[extraction]]
-name = "grain-left"
-input = "079d5.svg"
-element = "禾"
-
-[[radical]]
-name = "grain"
-char = "禾"
-pos = 0
-x = [0, 30]
-width = [40, 79]
-viewbox = "0 0 47 109"
-copy = false
-
-[[extraction]]
-name = "craft-left"
-input = "05de7.svg"
-element = "工"
-
-[[radical]]
-name = "craft"
-char = "工"
-pos = 0
-x = [0, 32]
-width = [40, 77]
-viewbox = "0 0 50 109"
-copy = false
-
-[[extraction]]
-name = "outhouse"
-input = "05802.svg"
-output = "2ba60.svg"
-element = "尚"
-
-[[extraction]]
-name = "west"
-input = "08981.svg"
-element = "覀"
-
-[[radical]]
-name = "west"
-char = "覀"
-pos = 0
-y = [0, 28]
-height = [34, 72]
-viewbox = "0 0 109 51"
-
-[[extraction]]
-name = "horse-left"
-input = "099bc.svg"
-element = "馬"
-
-[[radical]]
-name = "horse"
-char = "馬"
-pos = 0
-x = [0, 33]
-width = [40, 76]
-viewbox = "0 0 50 109"
-copy = false
-
-[[extraction]]
-name = "culture-right"
-input = "099bc.svg"
-element = "文"
