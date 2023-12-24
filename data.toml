@@ -72,11 +72,6 @@ width = [25, 92]
 height = [90, 109]
 viewbox = "30 0 30 109"
 
-[[extraction]]
-name = "craft-left"
-input = "05de7.svg"
-element = "工"
-
 [[radical]]
 name = "craft"
 char = "工"
@@ -85,6 +80,11 @@ x = [0, 32]
 width = [40, 77]
 viewbox = "0 0 50 109"
 copy = false
+
+[[extraction]]
+name = "craft-left"
+input = "05de7.svg"
+element = "工"
 
 [[extraction]]
 name = "rice-left"
