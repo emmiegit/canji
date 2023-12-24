@@ -81,6 +81,20 @@ input = "05de7.svg"
 element = "工"
 
 [[radical]]
+name = "jewel"
+char = "王"
+pos = 0
+x = [0, 28]
+width = [38, 81]
+viewbox = "0 0 45 109"
+copy = false
+
+[[extraction]]
+name = "jewel-left"
+input = "0743a.svg"
+element = "王"
+
+[[radical]]
 name = "rice"
 char = "米"
 pos = 0
