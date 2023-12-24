@@ -49,6 +49,7 @@ def build_svg(parts: Iterable[ImagePart]):
         }
         root.append(element)
 
+    ElementTree.indent(root, space="\t", level=0)
     return root
 
 
