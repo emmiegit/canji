@@ -11,7 +11,7 @@ import sys
 import unicodedata
 from xml.etree import ElementTree
 
-from common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY, parse_xml
+from common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY, parse_xml, register_xml_namespaces
 from data import read_data
 
 KANJIVG_DIRECTORY = "kanjivg/kanji"
