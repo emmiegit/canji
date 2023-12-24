@@ -177,6 +177,11 @@ element = "尚"
 
 # TODO
 
+[[extraction]]
+name = "heart-bottom"
+input = "05fd7.svg"
+element = "心"
+
 ###
 # INSIDE
 ###
