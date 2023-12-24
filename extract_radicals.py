@@ -96,6 +96,11 @@ if __name__ == "__main__":
                 bar(skipped=True)
                 continue
 
+            # Skip, excluded
+            if char in data.characters_exclude:
+                bar(skipped=True)
+                continue
+
             # Pre-process character/radical, moving to appropriate destination
             input_path = os.path.join(KANJIVG_DIRECTORY, path)
             output_path = os.path.join(

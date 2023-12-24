@@ -3,6 +3,22 @@
 # radicals to extract from full characters (since they are unavaiable individually)
 
 ###
+# Exclusions section
+###
+
+# This is a list of characters to not copy.
+#
+# Even though they are in KanjiVG, we aren't going to use them
+# usually because they are radicals or not used in Japanese.
+
+exclude = [
+    "个",
+    "丶",
+    "亅",
+    "⺨",
+]
+
+###
 # Radicals section
 ###
 
