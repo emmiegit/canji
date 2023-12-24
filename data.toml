@@ -154,6 +154,15 @@ name = "horse-left"
 input = "099bc.svg"
 element = "馬"
 
+[[radical]]
+name = "horse"
+char = "馬"
+pos = 0
+x = [0, 33]
+width = [40, 76]
+viewbox = "0 0 50 109"
+copy = false
+
 [[extraction]]
 name = "culture-right"
 input = "099bc.svg"
