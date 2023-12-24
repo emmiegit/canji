@@ -71,6 +71,7 @@ name = "craft"
 char = "工"
 pos = 0
 x = [0, 31]
+y = [5, 0]
 width = [41, 82]
 height = [118, 109]
 viewbox = "0 0 50 109"
