@@ -41,6 +41,7 @@ class ImagePart:
     width: int
     height: int
     stroke_multiplier: float
+    apply_weighting: bool
     viewbox: str = DEFAULT_VIEWBOX
 
 
@@ -71,6 +72,7 @@ class Radical:
     width: tuple[int, int]
     height: tuple[int, int]
     stroke_multiplier: tuple[float, float]
+    apply_weighting: bool
     viewbox: str
     _tree: Optional[ElementTree] = None
     _node: Optional[Element] = None
@@ -83,39 +85,40 @@ class Radical:
         return self._node
 
     def make_parts(self, other: Character) -> list[ImagePart]:
-        # Determine character weight, see if we need to squash even more
-        #
-        # This uses a heurestic which essentially says, hey, more complicated
-        # radicals tend to use more room, and simple ones get squashed when
-        # they appear next to a complicated one. But if they're both simple
-        # or both complicated they get more or less equal amounts of space.
-        #
-        # So this basically fudges with the proportions a bit depending on the
-        # "weight" of each character. If it has more sub-radicals, then we
-        # treat it as more "complicated", and thus it gets more leeway
-        #
-        # As part of the modification, if both fields are the same
-        # (e.g. they both have a starting X position of 0), then we assume
-        # that this radical doesn't stretch in that direction, so we should
-        # apply no fudging to it.
-
-        diff = weight(self.node) - weight(other.node)
-        diff *= 1 if self.position == 0 else -1
-
         x = copy(self.x)
         y = copy(self.y)
         width = copy(self.width)
         height = copy(self.height)
 
-        def adjust(vals, modifier):
-            if vals[0] != vals[1]:
-                vals[0] += diff * modifier
-                vals[1] -= diff * modifier
+        if self.apply_weighting:
+            # Determine character weight, see if we need to squash even more
+            #
+            # This uses a heurestic which essentially says, hey, more complicated
+            # radicals tend to use more room, and simple ones get squashed when
+            # they appear next to a complicated one. But if they're both simple
+            # or both complicated they get more or less equal amounts of space.
+            #
+            # So this basically fudges with the proportions a bit depending on the
+            # "weight" of each character. If it has more sub-radicals, then we
+            # treat it as more "complicated", and thus it gets more leeway
+            #
+            # As part of the modification, if both fields are the same
+            # (e.g. they both have a starting X position of 0), then we assume
+            # that this radical doesn't stretch in that direction, so we should
+            # apply no fudging to it.
 
-        adjust(x, -0.2)
-        adjust(y, -0.2)
-        adjust(width, 0.3)
-        adjust(height, 0.3)
+            diff = weight(self.node) - weight(other.node)
+            diff *= 1 if self.position == 0 else -1
+
+            def adjust(vals, modifier):
+                if vals[0] != vals[1]:
+                    vals[0] += diff * modifier
+                    vals[1] -= diff * modifier
+
+            adjust(x, -0.2)
+            adjust(y, -0.2)
+            adjust(width, 0.3)
+            adjust(height, 0.3)
 
         # Build image parts for construction
         parts = []
@@ -128,6 +131,7 @@ class Radical:
                     width=width[pos],
                     height=height[pos],
                     stroke_multiplier=self.stroke_multiplier[pos],
+                    apply_weighting=self.apply_weighting,
                     character=self.character if this else other.character,
                     node=self.node if this else other.node,
                     viewbox=self.viewbox if this else DEFAULT_VIEWBOX,
@@ -199,6 +203,7 @@ def read_data(path="data.toml"):
             width=entry.get("width", (109, 109)),
             height=entry.get("height", (109, 109)),
             stroke_multiplier=entry.get("stroke", (1, 1)),
+            apply_weighting=entry.get("weight", True),
             viewbox=entry.get("viewbox", DEFAULT_VIEWBOX),
         )
 
