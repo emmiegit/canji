@@ -109,6 +109,14 @@ input = "079d5.svg"
 element = "禾"
 
 [[radical]]
+name = "food"
+char = "飠"
+pos = 0
+x = [0, 40]
+width = [50, 71]
+viewbox = "0 0 75 109"
+
+[[radical]]
 name = "beast"
 char = "犭"
 pos = 0
