@@ -78,7 +78,22 @@ class Radical:
 
     def make_parts(self, other: Character) -> list[ImagePart]:
         # Determine character weight, see if we need to squash even more
-        diff = (weight(self.node) - weight(other.node)) / 2.5
+        #
+        # This uses a heurestic which essentially says, hey, more complicated
+        # radicals tend to use more room, and simple ones get squashed when
+        # they appear next to a complicated one. But if they're both simple
+        # or both complicated they get more or less equal amounts of space.
+        #
+        # So this basically fudges with the proportions a bit depending on the
+        # "weight" of each character. If it has more sub-radicals, then we
+        # treat it as more "complicated", and thus it gets more leeway
+        #
+        # As part of the modification, if both fields are the same
+        # (e.g. they both have a starting X position of 0), then we assume
+        # that this radical doesn't stretch in that direction, so we should
+        # apply no fudging to it.
+
+        diff = weight(self.node) - weight(other.node)
         diff *= 1 if self.position == 0 else -1
 
         x = copy(self.x)
@@ -86,16 +101,15 @@ class Radical:
         width = copy(self.width)
         height = copy(self.height)
 
-        def adjust(vals, invert=False):
-            modifier = -1 if invert else 1
+        def adjust(vals, modifier):
             if vals[0] != vals[1]:
                 vals[0] += diff * modifier
                 vals[1] -= diff * modifier
 
-        adjust(x, True)
-        adjust(y, True)
-        adjust(width)
-        adjust(height)
+        adjust(x, -0.2)
+        adjust(y, -0.2)
+        adjust(width, 0.3)
+        adjust(height, 0.3)
 
         # Build image parts for construction
         parts = []
