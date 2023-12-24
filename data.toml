@@ -126,7 +126,14 @@ element = "馬"
 # RIGHT
 ###
 
-# TODO
+[[radical]]
+name = "saber"
+char = "刂"
+pos = 1
+x = [0, 57]
+width = [80, 40]
+stroke = [1, 1.35]
+viewbox = "10 0 60 109"
 
 [[extraction]]
 name = "culture-right"
