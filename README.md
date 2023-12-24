@@ -21,6 +21,8 @@ source env/bin/activate
 pip install -r requirements.txt
 ```
 
+Presently, however, all the dependencies are purely cosmetic and thus optional. Scripts will work fine without them.
+
 Then, we need to extract and process radicals as separate SVGs. This involves both pulling out component radicals (e.g. 亻or 糹), it also copies full characters like 頑.
 
 ```sh

@@ -12,7 +12,10 @@ import unicodedata
 from xml.etree import ElementTree
 from xml.etree.ElementTree import Element
 
-from alive_progress import alive_bar
+try:
+    from alive_progress import alive_bar
+except ImportError:
+    from dummy_bar import DummyBar as alive_bar
 
 from charid import hex_to_char
 from common import (
