@@ -195,7 +195,16 @@ element = "心"
 # INSIDE
 ###
 
-# TODO
+[[radical]]
+name = "pent-in"
+char = "囗"
+pos = 0
+x = [0, 20]
+y = [0, 20]
+width = [109, 68]
+height = [109, 68]
+stroke = [1, 1.25]
+weight = false
 
 ###
 # CORNER
