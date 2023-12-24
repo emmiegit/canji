@@ -193,7 +193,14 @@ name = "head"
 input = "09811.svg"
 element = "頁"
 
-# TODO culture
+[[radical]]
+name = "culture"
+char = "文"
+pos = 1
+x = [0, 64]
+width = [78, 42]
+viewbox = "40 0 59 109"
+copy = false
 
 [[extraction]]
 name = "culture-right"
