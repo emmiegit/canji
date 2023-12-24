@@ -36,8 +36,8 @@ if __name__ == "__main__":
     register_xml_namespaces()
     data = read_data()
 
-    def is_radical(path):
-        return any(map(lambda r: r.file == path, data.radicals))
+    def is_radical(file):
+        return any(map(lambda r: os.path.basename(r.path) == file, data.radicals))
 
     # Process KanjiVG files
     for path in os.listdir(KANJIVG_DIRECTORY):
