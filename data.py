@@ -6,6 +6,7 @@ import os
 import re
 import tomllib
 from collections import defaultdict
+from copy import copy
 from dataclasses import dataclass
 from typing import Optional, Union
 from xml.etree import ElementTree
@@ -77,10 +78,23 @@ class Radical:
 
     def make_parts(self, other: Character) -> list[ImagePart]:
         # Determine character weight, see if we need to squash even more
-        ratio = weight(self.node) / weight(other.node)
-        ratios = (ratio, 1.0 - ratio)
-        if self.position == 1:
-            ratios = (ratios[1], ratios[0])
+        diff = (weight(self.node) - weight(other.node)) / 2
+        diff *= 1 if self.position == 0 else -1
+
+        x = copy(self.x)
+        y = copy(self.y)
+        width = copy(self.width)
+        height = copy(self.height)
+
+        def adjust(vals):
+            if vals[0] != vals[1]:
+                vals[0] += diff
+                vals[1] -= diff
+
+        adjust(x)
+        adjust(y)
+        adjust(width)
+        adjust(height)
 
         # Build image parts for construction
         parts = []
@@ -88,10 +102,10 @@ class Radical:
             this = self.position == pos
             parts.append(
                 ImagePart(
-                    x=self.x[pos],
-                    y=self.y[pos],
-                    width=self.width[pos],
-                    height=self.height[pos],
+                    x=x[pos],
+                    y=y[pos],
+                    width=width[pos],
+                    height=height[pos],
                     stroke_multiplier=self.stroke_multiplier[pos],
                     character=self.character if this else other.character,
                     node=self.node if this else other.node,
