@@ -11,7 +11,7 @@ from typing import Optional, Union
 from xml.etree import ElementTree
 from xml.etree.ElementTree import Element
 
-from common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY, DEFAULT_VIEWBOX, parse_xml
+from common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY, DEFAULT_VIEWBOX, SVG_KVG_PREFIX, parse_xml
 from charid import char_to_hex
 
 SVG_FILENAME_REGEX = re.compile(r"([0-9a-f]+)\.svg")
@@ -108,6 +108,12 @@ class KanjiData:
 
     def extractions_count(self) -> int:
         return sum(len(v) for v in self.extractions.values())
+
+
+def weight(node):
+    this_weight = int(f"{XML_KVG_PREFIX}element" in child.attrib)
+    children_weight = sum(map(weight, node))
+    return this_weight + children_weight
 
 
 def read_data(path="data.toml"):
