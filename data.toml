@@ -258,6 +258,17 @@ height = [109, 73]
 stroke = [1, 1.57]
 weight = false
 
+[[radical]]
+name = "gate"
+char = "門"
+pos = 0
+x = [0, 20]
+y = [0, 40]
+width = [109, 68]
+height = [109, 55]
+stroke = [1, 1.6]
+weight = false
+
 ###
 # CORNER
 ###
