@@ -145,7 +145,7 @@ def read_data(path="data.toml"):
             path=path,
         )
 
-    radicals = list(map(make_radical, data["radicals"]))
+    radicals = list(map(make_radical, data["radical"]))
     characters = list(map(make_character, os.listdir(CHARACTER_DIRECTORY)))
 
     return KanjiData(

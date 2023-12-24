@@ -1,9 +1,11 @@
 # This data file contains information used by the kanji generator system.
 # For instance, orientation and size information for radicals
 
-# Example entry:
-#
-# [[radicals]]
+###
+# Radicals section
+##
+
+# [[radical]]
 # name = "beast"          -- A convenient label for this radical.
 #                            Optional, but must be unique if specified.
 # char = "犭"             -- The Unicode character corresponding to this radical, if any.
@@ -27,7 +29,7 @@
 # LEFT
 ###
 
-[[radicals]]
+[[radical]]
 name = "beast"
 char = "犭"
 pos = 0
@@ -47,7 +49,7 @@ viewbox = "0 0 42 109"
 # TOP
 ###
 
-[[radicals]]
+[[radical]]
 name = "west"
 char = "⻃"
 pos = 0
@@ -73,7 +75,7 @@ viewbox = "0 0 109 51"
 # CORNER
 ###
 
-[[radicals]]
+[[radical]]
 name = "street"
 char = "⻌"
 pos = 1
