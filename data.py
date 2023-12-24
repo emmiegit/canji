@@ -16,6 +16,14 @@ SVG_FILENAME_REGEX = re.compile(r"([0-9a-f]+)\.svg")
 
 
 @dataclass
+class Extraction:
+    name: str
+    input: str
+    output: str
+    element: str
+
+
+@dataclass
 class ImagePart:
     character: Optional[str]
     node: Element
@@ -89,6 +97,7 @@ class KanjiData:
     radical_names: dict[str, Radical]
     radicals: list[Radical]
     characters: list[Character]
+    extractions: list[Extraction]
 
     def is_radical(self, s: str) -> bool:
         return s in self.radical_set
@@ -145,12 +154,28 @@ def read_data(path="data.toml"):
             path=path,
         )
 
+    def make_extraction(entry):
+        name = entry["name"]
+        input = entry["input"]
+        output = entry["output"]
+        element = entry["element"]
+        extraction = Extraction(
+            name=name,
+            input=input,
+            output=output,
+            element=element,
+        )
+
+        return name, extraction
+
     radicals = list(map(make_radical, data["radical"]))
     characters = list(map(make_character, os.listdir(CHARACTER_DIRECTORY)))
+    extractions = dict(map(make_extraction, data["extraction"]))
 
     return KanjiData(
         radicals=radicals,
         radical_set=frozenset(radical_set),
         radical_names=radical_names,
         characters=characters,
+        extractions=extractions,
     )

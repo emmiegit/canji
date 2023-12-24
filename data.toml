@@ -1,5 +1,6 @@
 # This data file contains information used by the kanji generator system.
-# For instance, orientation and size information for radicals
+# For instance, orientation and size information for radicals, as well as
+# radicals to extract from full characters (since they are unavaiable individually)
 
 ###
 # Radicals section
@@ -85,3 +86,19 @@ width = [78, 109]
 height = [80, 109]
 stroke = [1.28, 1]
 viewbox = "0 0 109 109"
+
+###
+# Extractions section
+###
+
+[[extraction]]
+name = "grain-left"
+input = "079d5.svg"
+output = "079be.svg"
+element = "禾"
+
+[[extraction]]
+name = "outhouse"
+input = "05802.svg"
+output = "2ba60.svg"
+element = "尚"
