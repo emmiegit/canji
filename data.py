@@ -130,12 +130,12 @@ def read_data(path="data.toml"):
             path=os.path.join(RADICAL_DIRECTORY, file),
             copy=entry.get("copy", True),
             position=entry["pos"],
-            x=entry["x"],
-            y=entry["y"],
-            width=entry["width"],
-            height=entry["height"],
+            x=entry.get("x", (0, 0)),
+            y=entry.get("y", (0, 0)),
+            width=entry.get("width", (109, 109)),
+            height=entry.get("height", (109, 109)),
             stroke_multiplier=entry.get("stroke", (1, 1)),
-            viewbox=entry["viewbox"],
+            viewbox=entry.get("viewbox", DEFAULT_VIEWBOX),
         )
 
         if char is not None:

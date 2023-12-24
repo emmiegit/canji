@@ -35,9 +35,7 @@ name = "beast"
 char = "犭"
 pos = 0
 x = [0, 30]
-y = [0, 0]
 width = [36, 82]
-height = [109, 109]
 viewbox = "0 0 42 109"
 
 [[radical]]
@@ -64,9 +62,7 @@ viewbox = "30 0 30 109"
 name = "west"
 char = "⻃"
 pos = 0
-x = [0, 0]
 y = [0, 26]
-width = [109, 109]
 height = [33, 72]
 viewbox = "0 0 109 51"
 
