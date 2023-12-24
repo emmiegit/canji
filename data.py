@@ -56,6 +56,7 @@ class Radical:
     name: Optional[str]
     character: Optional[str]
     path: str
+    copy: bool
     position: Union[0, 1]
     x: tuple[int, int]
     y: tuple[int, int]
@@ -127,6 +128,7 @@ def read_data(path="data.toml"):
             name=name,
             character=char,
             path=os.path.join(RADICAL_DIRECTORY, file),
+            copy=entry.get("copy", True),
             position=entry["pos"],
             x=entry["x"],
             y=entry["y"],

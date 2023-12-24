@@ -52,7 +52,7 @@ def make_svg_from_extraction(root, element_str):
     extracted = find_element(root, element_str)
     assert extracted, "Could not find element to extract"
     output_path = os.path.join(RADICAL_DIRECTORY, extraction.output)
-    svg = build_svg(lambda root: root.append(extracted))
+    svg = build_svg(lambda root: root.append(extracted), add_style=True)
     write_svg(output_path, svg)
 
 
@@ -75,7 +75,7 @@ if __name__ == "__main__":
     data = read_data()
 
     def is_radical(file):
-        return any(map(lambda r: os.path.basename(r.path) == file, data.radicals))
+        return any(map(lambda r: os.path.basename(r.path) == file and r.copy, data.radicals))
 
     # Process KanjiVG files
     print("Processing KanjiVG files...")
