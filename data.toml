@@ -62,6 +62,7 @@ exclude = [
 # LEFT
 ###
 
+# This one sucks tbh lol
 [[radical]]
 name = "stick"
 char = "丨"
