@@ -34,7 +34,7 @@ if __name__ == "__main__":
 
     # Setup
     register_xml_namespaces()
-    data = read_data(load_radicals=False)
+    data = read_data()
 
     def is_radical(path):
         return any(map(lambda r: r.file == path, data.radicals))
