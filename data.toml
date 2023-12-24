@@ -260,6 +260,15 @@ input = "05802.svg"
 output = "2ba60.svg"
 element = "尚"
 
+[[radical]]
+name = "old-man"
+char = "耂"
+pos = 0
+y = [0, 39]
+height = [85, 70]
+viewbox = "0 0 109 109"
+stroke = [1, 1.28]
+
 ###
 # BOTTOM
 ###
