@@ -118,7 +118,7 @@ class KanjiData:
 
 
 def weight(node):
-    this_weight = int(f"{XML_KVG_PREFIX}element" in child.attrib)
+    this_weight = int(f"{XML_KVG_PREFIX}element" in node.attrib)
     children_weight = sum(map(weight, node))
     return this_weight + children_weight
 
