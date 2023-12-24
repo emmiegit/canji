@@ -20,6 +20,7 @@ from common import (
     DEFAULT_VIEWBOX,
     XML_KVG_URL,
     XML_SVG_URL,
+    build_svg,
     parse_xml,
     register_xml_namespaces,
     write_svg,
@@ -28,12 +29,6 @@ from data import read_data
 
 KANJIVG_DIRECTORY = "kanjivg/kanji"
 REGULAR_KANJI_PATH_REGEX = re.compile(r"(\w+)\.svg")
-
-
-def process_kanji(root):
-    # Delete stroke order
-    assert "StrokeNumbers" in root[1].get("id", "")
-    del root[1]
 
 
 def find_element(root, element):
@@ -51,6 +46,20 @@ def find_element(root, element):
             return result
 
     return None
+
+
+def make_svg_from_extraction(root, element_str):
+    extracted = find_element(root, element_str)
+    assert extracted, "Could not find element to extract"
+    output_path = os.path.join(RADICAL_DIRECTORY, extraction.output)
+    svg = build_svg(lambda root: root.append(extracted))
+    write_svg(output_path, svg)
+
+
+def process_kanji(root):
+    # Delete stroke order
+    assert "StrokeNumbers" in root[1].get("id", "")
+    del root[1]
 
 
 if __name__ == "__main__":
@@ -100,11 +109,5 @@ if __name__ == "__main__":
 
             # If we have any extractions from this character, then do those
             for extraction in data.extractions[path]:
+                make_svg_from_extraction(root, extraction.element)
                 bar()
-
-            def make_svg_from_extraction(root, element):
-                extracted = find_element(root, element)
-                assert extracted, "Could not find element to extract"
-                output_path = os.path.join(RADICAL_DIRECTORY, extraction.output)
-                svg = build_svg(lambda root: root.append(extracted))
-                write_svg(output_path, svg)
