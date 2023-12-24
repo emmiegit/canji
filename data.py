@@ -78,7 +78,7 @@ class Radical:
 
     def make_parts(self, other: Character) -> list[ImagePart]:
         # Determine character weight, see if we need to squash even more
-        diff = (weight(self.node) - weight(other.node)) / 2
+        diff = (weight(self.node) - weight(other.node)) / 2.5
         diff *= 1 if self.position == 0 else -1
 
         x = copy(self.x)
@@ -86,13 +86,14 @@ class Radical:
         width = copy(self.width)
         height = copy(self.height)
 
-        def adjust(vals):
+        def adjust(vals, invert=False):
+            modifier = -1 if invert else 1
             if vals[0] != vals[1]:
-                vals[0] += diff
-                vals[1] -= diff
+                vals[0] += diff * modifier
+                vals[1] -= diff * modifier
 
-        adjust(x)
-        adjust(y)
+        adjust(x, True)
+        adjust(y, True)
         adjust(width)
         adjust(height)
 
