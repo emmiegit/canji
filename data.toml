@@ -4,6 +4,8 @@
 # Example entry:
 #
 # [[radicals]]
+# name = "beast"          -- A convenient label for this radical.
+#                            Optional, but must be unique if specified.
 # char = "犭"             -- The Unicode character corresponding to this radical, if any.
 # file = "072ad.svg"      -- The path to the SVG file with this radical. Optional if "char" is given.
 # pos = 0                 -- Which position this radical takes.
@@ -26,6 +28,7 @@
 ###
 
 [[radicals]]
+name = "beast"
 char = "犭"
 pos = 0
 x = [0, 28]
@@ -57,6 +60,7 @@ viewbox = "0 0 42 109"
 ###
 
 [[radicals]]
+name = "street"
 char = "⻌"
 pos = 1
 x = [26, 0]

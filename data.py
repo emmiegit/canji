@@ -43,6 +43,7 @@ class Character:
 
 @dataclass
 class Radical:
+    name: Optional[str]
     character: Optional[str]
     path: str
     position: Union[0, 1]
@@ -81,31 +82,33 @@ class Radical:
 
 @dataclass
 class KanjiData:
-    radical_list: frozenset[str]
+    radical_set: frozenset[str]
+    radical_names: dict[str, Radical]
     radicals: list[Radical]
     characters: list[Character]
 
     def is_radical(self, s: str) -> bool:
-        return s in self.radical_list
+        return s in self.radical_set
 
 
 def read_data(path="data.toml"):
     with open(path, "rb") as file:
         data = tomllib.load(file)
 
-    radical_list = set()
+    radical_set = set()
+    radical_names = {}
 
     def make_radical(entry):
         char = entry.get("char")
         if char is not None:
-            radical_list.add(char)
+            radical_set.add(char)
 
         file = entry.get("file")
         if file is None:
             assert char is not None, "One of char, file must be specified!"
             file = f"{ord(char):05x}.svg"
 
-        return Radical(
+        radical = Radical(
             character=char,
             path=os.path.join(RADICAL_DIRECTORY, file),
             position=entry["pos"],
@@ -115,6 +118,13 @@ def read_data(path="data.toml"):
             height=entry["height"],
             viewbox=entry["viewbox"],
         )
+
+        name = entry.get("name")
+        if name is not None:
+            assert name not in radical_names, f"Radical name {name} is not unique!"
+            radical_names[name] = radical
+
+        return radical
 
     def make_character(file):
         match = SVG_FILENAME_REGEX.fullmatch(file)
@@ -134,6 +144,7 @@ def read_data(path="data.toml"):
 
     return KanjiData(
         radicals=radicals,
-        radical_list=frozenset(radical_list),
+        radical_set=frozenset(radical_set),
+        radical_names=radical_names,
         characters=characters,
     )
