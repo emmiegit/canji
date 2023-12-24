@@ -248,6 +248,17 @@ stroke = [1, 1.57]
 weight = false
 
 [[radical]]
+name = "open-box"
+char = "凵"
+pos = 1
+x = [20, 0]
+y = [18, 0]
+width = [70, 109]
+height = [70, 109]
+stroke = [1.49, 1]
+weight = false
+
+[[radical]]
 name = "hiding"
 char = "匸"
 pos = 0
