@@ -20,6 +20,7 @@ exclude = [
     "卍",
     "⻃",
     "⺨",
+    "儿",
 ]
 
 ###
@@ -193,6 +194,18 @@ height = [75, 88]
 name = "heart-bottom"
 input = "05fd7.svg"
 element = "心"
+
+[[radical]]
+name = "human-legs"
+char = "儿"
+pos = 1
+y = [0, 34]
+height = [65, 52]
+
+[[extraction]]
+name = "human-legs"
+input = "05150.svg"
+element = "儿"
 
 ###
 # INSIDE
