@@ -1,9 +1,9 @@
-from collections import namedtuple
-from xml.etree import ElementTree
-
 """
 Common functions and concepts used by multiple scripts
 """
+
+from collections import namedtuple
+from xml.etree import ElementTree
 
 RADICAL_DIRECTORY = "radicals"
 CHARACTER_DIRECTORY = "characters"

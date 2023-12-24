@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 
+"""
+Generates randomly-created kanji.
+Uses the radical positioning information in data.toml
+and the extracted radical and character SVGs from extract_radicals.py
+"""
+
 import os
 import random
 import sys

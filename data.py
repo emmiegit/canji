@@ -1,3 +1,7 @@
+"""
+Code to read the data file for kanji processing.
+"""
+
 import os
 import re
 import tomllib
@@ -7,10 +11,6 @@ from xml.etree import ElementTree
 from xml.etree.ElementTree import Element
 
 from common import RADICAL_DIRECTORY, CHARACTER_DIRECTORY, DEFAULT_VIEWBOX, parse_xml
-
-"""
-Code to read the data file for kanji processing.
-"""
 
 SVG_FILENAME_REGEX = re.compile(r"([0-9a-f]+)\.svg")
 

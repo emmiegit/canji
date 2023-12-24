@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 
+"""
+Extracts character and radical SVGs from KanjiVG SVG files.
+Essentially the pre-processing step required for this project.
+"""
+
 import os
 import re
 import sys
