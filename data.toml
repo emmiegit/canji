@@ -180,6 +180,19 @@ input = "08981.svg"
 element = "覀"
 
 [[radical]]
+name = "empty"
+char = "穴"
+pos = 0
+y = [0, 30]
+height = [38, 73]
+viewbox = "0 0 109 60"
+
+[[extraction]]
+name = "empty"
+input = "07a81.svg"
+element = "穴"
+
+[[radical]]
 name = "outhouse"
 file = "2ba60.svg"
 pos = 0
