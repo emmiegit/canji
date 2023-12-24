@@ -34,6 +34,9 @@ def modify_stroke_thickness(element, stroke_multiplier):
     # Rebuild inline CSS with multiplied stroke-width value.
     style_parts = group.attrib["style"].split(";")
     for i, style_part in enumerate(style_parts):
+        if not style_part:
+            continue
+
         key, value = style_part.split(":")
         if "key" != "stroke-width":
             continue

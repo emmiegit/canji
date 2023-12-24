@@ -119,7 +119,7 @@ def read_data(path="data.toml"):
             y=entry["y"],
             width=entry["width"],
             height=entry["height"],
-            stroke_multiplier=entry["stroke"],
+            stroke_multiplier=entry.get("stroke", (1, 1)),
             viewbox=entry["viewbox"],
         )
 
