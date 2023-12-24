@@ -65,7 +65,7 @@ def build_svg_from_parts(parts: Iterable[ImagePart]):
                 modify_stroke_thickness(element, part.stroke_multiplier)
             root.append(element)
 
-    return build_svg(inner)
+    return build_svg(inner, add_style=False)
 
 
 if __name__ == "__main__":

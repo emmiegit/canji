@@ -34,7 +34,7 @@ def parse_xml(path):
     return tree, root
 
 
-def build_svg(inner) -> Element:
+def build_svg(inner, *, add_style) -> Element:
     root = Element(
         "svg",
         attrib={
@@ -43,7 +43,19 @@ def build_svg(inner) -> Element:
             "viewBox": DEFAULT_VIEWBOX,
         },
     )
-    inner(root)
+
+    if add_style:
+        wrap = Element(
+            "g",
+            attrib={
+                "style": "fill:none;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;"
+            },
+        )
+        root.append(wrap)
+        inner(wrap)
+    else:
+        inner(root)
+
     ElementTree.indent(root, space="\t", level=0)
     return root
 
