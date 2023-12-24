@@ -236,6 +236,16 @@ width = [78, 109]
 height = [80, 109]
 stroke = [1.28, 1]
 
+[[radical]]
+name = "disease"
+char = "疒"
+pos = 0
+x = [0, 32]
+y = [0, 24]
+width = [109, 74]
+height = [109, 73]
+stroke = [1, 1.35]
+
 ###
 # GRAVEYARD
 ###
