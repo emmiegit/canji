@@ -147,6 +147,14 @@ name = "west"
 input = "08981.svg"
 element = "覀"
 
+[[radical]]
+name = "outhouse"
+file = "2ba60.svg"
+pos = 0
+y = [0, 36]
+height = [46, 73]
+viewbox = "0 0 109 73"
+
 [[extraction]]
 name = "outhouse"
 input = "05802.svg"
