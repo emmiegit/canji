@@ -166,8 +166,11 @@ def read_data(path="data.toml"):
     for entry in data["extraction"]:
         name = entry["name"]
         input = entry["input"]
-        output = entry["output"]
+        output = entry.get("output")
         element = entry["element"]
+
+        if output is None:
+            output = f"{char_to_hex(element)}.svg"
 
         extractions[input].append(
             Extraction(
