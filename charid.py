@@ -15,6 +15,10 @@ def char_to_hex(c):
     return f"{ord(c):05x}"
 
 
+def char_to_file(c):
+    return f"{char_to_hex(c)}.svg"
+
+
 if __name__ == "__main__":
     for arg in sys.argv[1:]:
         if len(arg) == 1:
