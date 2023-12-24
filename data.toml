@@ -70,8 +70,9 @@ exclude = [
 name = "craft"
 char = "工"
 pos = 0
-x = [0, 32]
-width = [40, 77]
+x = [0, 31]
+width = [41, 82]
+height = [118, 109]
 viewbox = "0 0 50 109"
 copy = false
 
