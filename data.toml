@@ -57,6 +57,15 @@ width = [40, 79]
 viewbox = "0 0 47 109"
 copy = false
 
+[[radical]]
+name = "craft"
+char = "工"
+pos = 0
+x = [0, 32]
+width = [40, 77]
+viewbox = "0 0 50 109"
+copy = false
+
 ###
 # RIGHT
 ###
@@ -111,6 +120,12 @@ name = "grain-left"
 input = "079d5.svg"
 output = "079be.svg"
 element = "禾"
+
+[[extraction]]
+name = "craft-left"
+input = "05de7.svg"
+output = "05de5.svg"
+element = "工"
 
 [[extraction]]
 name = "outhouse"
