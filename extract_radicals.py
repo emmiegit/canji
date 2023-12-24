@@ -44,7 +44,7 @@ if __name__ == "__main__":
     # Process KanjiVG files
     print("Processing KanjiVG files...")
     kanjivg_paths = os.listdir(KANJIVG_DIRECTORY)
-    with alive_bar(len(kanjivg_paths)) as bar:
+    with alive_bar(len(kanjivg_paths) + data.extractions_count()) as bar:
         for path in kanjivg_paths:
             # Skip, only consider non-variants
             match = REGULAR_KANJI_PATH_REGEX.fullmatch(path)
@@ -59,6 +59,7 @@ if __name__ == "__main__":
                 bar(skipped=True)
                 continue
 
+            # Pre-process character/radical, moving to appropriate destination
             input_path = os.path.join(KANJIVG_DIRECTORY, path)
             output_path = os.path.join(
                 RADICAL_DIRECTORY if is_radical(path) else CHARACTER_DIRECTORY,

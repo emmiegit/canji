@@ -5,6 +5,7 @@ Code to read the data file for kanji processing.
 import os
 import re
 import tomllib
+from collections import defaultdict
 from dataclasses import dataclass
 from typing import Optional, Union
 from xml.etree import ElementTree
@@ -97,10 +98,13 @@ class KanjiData:
     radical_names: dict[str, Radical]
     radicals: list[Radical]
     characters: list[Character]
-    extractions: list[Extraction]
+    extractions: dict[str, Extraction]
 
     def is_radical(self, s: str) -> bool:
         return s in self.radical_set
+
+    def extractions_count(self) -> int:
+        return sum(len(v) for v in self.extractions.values())
 
 
 def read_data(path="data.toml"):
@@ -154,23 +158,22 @@ def read_data(path="data.toml"):
             path=path,
         )
 
-    def make_extraction(entry):
+    extractions = defaultdict(list)
+    for entry in data["extraction"]:
         name = entry["name"]
         input = entry["input"]
         output = entry["output"]
         element = entry["element"]
-        extraction = Extraction(
+
+        extractions[input].append(Extraction(
             name=name,
             input=input,
             output=output,
             element=element,
-        )
-
-        return name, extraction
+        ))
 
     radicals = list(map(make_radical, data["radical"]))
     characters = list(map(make_character, os.listdir(CHARACTER_DIRECTORY)))
-    extractions = dict(map(make_extraction, data["extraction"]))
 
     return KanjiData(
         radicals=radicals,
