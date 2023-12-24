@@ -299,6 +299,17 @@ stroke = [1, 1.57]
 weight = false
 
 [[radical]]
+name = "hood"
+char = "冂"
+pos = 0
+x = [0, 17]
+y = [0, 17]
+width = [109, 75]
+height = [109, 75]
+stroke = [1, 1.45]
+weight = false
+
+[[radical]]
 name = "gate"
 char = "門"
 pos = 0
