@@ -15,7 +15,13 @@ from typing import Iterable
 from xml.etree import ElementTree
 from xml.etree.ElementTree import Element, SubElement
 
-from common import DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_VIEWBOX, parse_xml, register_xml_namespaces
+from common import (
+    DEFAULT_WIDTH,
+    DEFAULT_HEIGHT,
+    DEFAULT_VIEWBOX,
+    parse_xml,
+    register_xml_namespaces,
+)
 from data import Radical, ImagePart, read_data
 
 XML_HEADER = b'<?xml version="1.0" encoding="UTF-8" standalone="no"?>'
@@ -64,7 +70,7 @@ if __name__ == "__main__":
     data = read_data()
 
     # Generate some random characters
-    output_dir = os.path.expanduser("~/incoming") # XXX
+    output_dir = os.path.expanduser("~/incoming")  # XXX
     for i in range(10):
         radical = random.choice(data.radicals)
         character = random.choice(data.characters)
