@@ -30,6 +30,7 @@ XML_HEADER = b'<?xml version="1.0" encoding="UTF-8" standalone="no"?>'
 def modify_stroke_thickness(element, stroke_multiplier):
     group = element[0]
     assert "kvg:StrokePaths" in group.attrib["id"]
+    assert "style" in group.attrib
 
     # Rebuild inline CSS with multiplied stroke-width value.
     style_parts = group.attrib["style"].split(";")
@@ -38,7 +39,7 @@ def modify_stroke_thickness(element, stroke_multiplier):
             continue
 
         key, value = style_part.split(":")
-        if "key" != "stroke-width":
+        if key != "stroke-width":
             continue
 
         new_value = float(value) * stroke_multiplier
