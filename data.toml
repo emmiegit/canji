@@ -54,6 +54,9 @@ exclude = [
 #                            characters or the target is incorrect or already used
 #                            by another radical file.
 # element = "禾"          -- The value for "kvg:element" to look for.
+#
+#
+# Remember any extractions need "copy = false" for their corresponding radical data!
 
 ###
 # LEFT
