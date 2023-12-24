@@ -29,6 +29,12 @@ Then, we need to extract and process radicals as separate SVGs. This involves bo
 ./extract_radicals.py
 ```
 
+Now we can generate some kanji! Since there are a few options, consult `--help` to see everything, but the basic usage pattern is:
+
+```sh
+./build_kanji.py -o output_dir -c 100
+```
+
 If you need to start over, you can wipe the output data.
 
 ```sh
