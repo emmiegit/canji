@@ -86,6 +86,15 @@ name = "craft-left"
 input = "05de7.svg"
 element = "工"
 
+[[radical]]
+name = "rice"
+char = "米"
+pos = 0
+x = [0, 32]
+width = [40, 72]
+viewbox = "0 0 50 109"
+copy = false
+
 [[extraction]]
 name = "rice-left"
 input = "07c81.svg"
