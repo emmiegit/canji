@@ -179,6 +179,22 @@ width = [80, 40]
 stroke = [1, 1.35]
 viewbox = "10 0 60 109"
 
+[[radical]]
+name = "head"
+char = "頁"
+pos = 1
+x = [0, 60]
+width = [76, 40]
+viewbox = "40 0 60 109"
+copy = false
+
+[[extraction]]
+name = "head"
+input = "09811.svg"
+element = "頁"
+
+# TODO culture
+
 [[extraction]]
 name = "culture-right"
 input = "099bc.svg"
