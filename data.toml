@@ -40,6 +40,16 @@ width = [36, 82]
 height = [109, 109]
 viewbox = "0 0 42 109"
 
+[[radical]]
+name = "stick"
+char = "丨"
+pos = 0
+x = [0, 17]
+y = [10, 0]
+width = [25, 92]
+height = [90, 109]
+viewbox = "30 0 30 109"
+
 ###
 # RIGHT
 ###
