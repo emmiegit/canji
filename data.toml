@@ -48,6 +48,15 @@ width = [25, 92]
 height = [90, 109]
 viewbox = "30 0 30 109"
 
+[[radical]]
+name = "grain"
+char = "禾"
+pos = 0
+x = [0, 30]
+width = [40, 79]
+viewbox = "0 0 47 109"
+copy = false
+
 ###
 # RIGHT
 ###
